@@ -1,21 +1,8 @@
-// slider about
-$(document).ready(function () {
-  $(".owl-carousel").owlCarousel({
-    center: false,
-    items: 2,
-    loop: true,
-    margin: 10,
-    autoplay: true,
-    responsive: {
-      600: {
-        items: 3,
-      },
-      1000: {
-        items: 1,
-      },
-    },
-  });
-});
+let arabic = document.querySelector("#Ar");
+let english = document.querySelector("#En");
+let body_mode = true;
+let transBtn = document.querySelectorAll(".trans");
+let mood = true;
 
 // loading page
 $(window).ready(function () {
@@ -58,22 +45,34 @@ window.onscroll = function () {
 
 // translate code
 
-let arabic = document.querySelector("#Ar");
-let english = document.querySelector("#En");
-let transBtn = document.querySelector(".trans")
-let mood = true
-
-transBtn.addEventListener("click" , function(){
-
-  if (mood == true){
+function State() {
+  if (mood == true) {
     arabic.classList.add("state");
     english.classList.remove("state");
     mood = false;
-  }else{
+  } else {
     arabic.classList.remove("state");
     english.classList.add("state");
     mood = true;
   }
- 
-  
-})
+}
+
+// Dark and light mood
+function myFunction() {
+  let btnMode = document.querySelector("#btnMode");
+  var element = document.body;
+
+  if (body_mode == true) {
+    btnMode.classList.add("light");
+    element.classList.add("light-mode");
+    btnMode.classList.remove("moon-dark");
+    element.classList.remove("dark");
+    body_mode = false;
+  } else {
+    btnMode.classList.add("moon-dark");
+    element.classList.add("dark");
+    btnMode.classList.remove("light");
+    element.classList.remove("light-mode");
+    body_mode = true;
+  }
+}

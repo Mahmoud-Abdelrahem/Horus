@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
-<body>
+<body class="dark">
 
     <!-- Start loading page -->
     <div class="loading-spiner">
@@ -37,13 +37,13 @@
     <div class="slide-text">
         <div class="row">
             <div class="col-lg-2 ">
-                <span class="moon">
-                    <a href=""><i class="fa-solid fa-moon"></i></a>
+                <span class="moon ">
+                    <a onclick="myFunction()"><i class="fa-solid fa-moon moon-dark" id="btnMode"></i></a>
                 </span>
             </div>
             <div class="col-lg-2">
                 <span class="trans">
-                    <a> <i class="fa-solid fa-globe"></i></a>
+                    <a onclick="State()"> <i class="fa-solid fa-globe"></i></a>
                 </span>
             </div>
         </div>
@@ -1012,7 +1012,6 @@
     <script src="assets/vendor/bootstrap/bootstrap.js"></script>
     <script src="assets/vendor/wow/wow.min.js"></script>
     <script src="assets/vendor/light box/lightbox.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 
