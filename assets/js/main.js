@@ -56,26 +56,24 @@ window.onscroll = function () {
   }
 };
 
-// Swiper
-// var swiper = new Swiper(".mySwiper", {
-//   spaceBetween: 30,
-//   centeredSlides: true,
-//   loop:true,
-//   slidesPerView: 2,
-//   autoplay: {
-//     delay: 3000,
-//     disableOnInteraction: false,
-//   },
+// translate code
 
-//   grid: {
-//     rows: 1,
-//   },
-//   pagination: {
-//     el: ".swiper-pagination",
-//     clickable: true,
-//   },
-//   navigation: {
-//     nextEl: ".swiper-button-next",
-//     prevEl: ".swiper-button-prev",
-//   },
-// });
+let arabic = document.querySelector("#Ar");
+let english = document.querySelector("#En");
+let transBtn = document.querySelector(".trans")
+let mood = true
+
+transBtn.addEventListener("click" , function(){
+
+  if (mood == true){
+    arabic.classList.add("state");
+    english.classList.remove("state");
+    mood = false;
+  }else{
+    arabic.classList.remove("state");
+    english.classList.add("state");
+    mood = true;
+  }
+ 
+  
+})

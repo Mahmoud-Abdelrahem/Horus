@@ -64,12 +64,12 @@ a {
     /* background-color: rgb(248, 240, 240); */
     /* background: linear-gradient(to bottom, #282c3f, #ee5f73); */
     background: linear-gradient(to bottom, #282c3f, #e45927);
-    top: 30%;
+    top: 25%;
     right: 0;
     width: 40px;
     margin: auto;
     border-radius: 5px;
-    z-index: 111;
+    z-index: 1112222222;
 }
 
 .slide-text span i {
@@ -83,7 +83,8 @@ a {
     cursor: pointer;
     transition: all .3s;
 }
-.slide-text span i:hover{
+
+.slide-text span i:hover {
     transform: scale(1.4);
 }
 
@@ -92,11 +93,12 @@ a {
     right: 3px;
 }
 
-.moon i{
+.moon i {
     color: black !important;
 }
-.trans i{
-   color: white !important;
+
+.trans i {
+    color: white !important;
 }
 
 /*##################*/
@@ -364,6 +366,7 @@ header {
 .Navbar .collapse .nav-after {
     position: relative;
     transition: all .3s;
+    padding: 0 10px;
 }
 
 .Navbar .collapse .nav-after:hover {
@@ -428,21 +431,22 @@ header {
     width: 100%;
     box-shadow: 0 0 20px #D65A31;
 }
+
 @media screen and (max-width:768px) {
-    .Navbar .collapse .nav-after a::after{
+    .Navbar .collapse .nav-after a::after {
         display: none;
         visibility: hidden;
     }
-    
+
 }
 
 
 @media screen and (max-width:600px) {
-    .Navbar .collapse .nav-after a::after{
+    .Navbar .collapse .nav-after a::after {
         display: none;
         visibility: hidden;
     }
-    
+
 }
 
 /*################################*/
@@ -860,7 +864,8 @@ header {
     cursor: pointer;
     transition: all .3s;
 }
-.cool-bag:hover{
+
+.cool-bag:hover {
     transform: scale(1.03);
 }
 
@@ -960,17 +965,17 @@ header {
 }
 
 @media screen and (max-width:768px) {
-    .main-after::after{
+    .main-after::after {
         left: 43%;
     }
-    
+
 }
 
 @media screen and (max-width:600px) {
-    .main-after::after{
+    .main-after::after {
         left: 36%;
     }
-    
+
 }
 
 /***************************************** End Section****************************************************/
@@ -1984,7 +1989,7 @@ header {
     color: #fff;
 }
 
-#footer .footer-top .social-links a {
+ .social-links a {
     font-size: 18px;
     display: inline-block;
     background: #292929;
@@ -1999,7 +2004,7 @@ header {
     transition: 0.3s;
 }
 
-#footer .footer-top .social-links a:hover {
+.social-links a:hover {
     background: #D65A31;
     color: #151515;
     text-decoration: none;
@@ -2104,4 +2109,147 @@ header {
 
 #footer .credits a {
     color: #D65A31;
+}
+
+/***************************************************************************************/
+/* Arabic Css */
+/***************************************************************************************/
+.Arabic {
+    font-family: 'Assistant', sans-serif;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 400;
+    transition: all .3s;
+
+}
+.Arabic .slide-text{
+    right: 100%;
+    left: 0;
+}
+
+.English {
+    transition: all .3s;
+}
+
+.Arabic footer {
+    direction: rtl;
+}
+
+.Arabic #aboutus {
+    direction: rtl;
+}
+
+.state {
+    display: none;
+}
+
+.active_ar {
+    position: relative;
+    padding: 0 10px;
+}
+
+.active_ar::after {
+    content: "";
+    background-color: #d6531d;
+    height: 2px;
+    position: absolute;
+    top: 60px;
+
+}
+
+/*Header line transition*/
+.active_ar1::after {
+    width: 130px;
+    left: 32px;
+}
+
+.active_ar2::after {
+    width: 0px;
+    left: 15px;
+    transition: all .3s;
+}
+
+.active_ar2:hover::after {
+    width: 100px;
+}
+
+/****/
+.active_ar2::after {
+    width: 0px;
+    left: 15px;
+    transition: all .3s;
+}
+
+.active_ar2:hover::after {
+    width: 100px;
+}
+
+/****/
+.active_ar3::after {
+    width: 0px;
+    left: 15px;
+    transition: all .3s;
+}
+
+.active_ar3:hover::after {
+    width: 80px;
+}
+
+/****/
+.active_ar4::after {
+    width: 0px;
+    left: 15px;
+    transition: all .3s;
+}
+
+.active_ar4:hover::after {
+    width: 100px;
+}
+/****/
+.active_ar5::after {
+    width: 0px;
+    left: 15px;
+    transition: all .3s;
+}
+
+.active_ar5:hover::after {
+    width: 80px;
+}
+/****/
+.active_ar6::after {
+    width: 0px;
+    left: 25px;
+    transition: all .3s;
+}
+
+.active_ar6:hover::after {
+    width: 100px;
+}
+.Arabic #footer .footer-top .footer-links ul i{
+    padding: 0 0 0 10px;
+}
+
+@media screen and (max-width:768px) {
+
+    .active_ar::after {
+        display: none;
+        visibility: hidden;
+    }
+
+    .active_ar1::after {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+@media screen and (max-width:600px) {
+
+    .active_ar::after {
+        display: none;
+        visibility: hidden;
+    }
+
+    .active_ar1::after {
+        display: none;
+        visibility: hidden;
+    }
 }
