@@ -1,3 +1,33 @@
+<?php 
+include 'app/config.php';
+include 'app/functions.php';
+session_start();
+
+$select = "SELECT * FROM users";
+$s =  mysqli_query($conn, $select);
+$row = mysqli_fetch_assoc($s);
+$numRows = mysqli_num_rows($s);
+$id = $_SESSION['admins']['id'];
+
+if(isset($_POST['lang'])){
+    if($row['langID'] == 1){
+        $update = "UPDATE users set `langID` = 2  where id = $id";
+         mysqli_query($conn,$update);
+    }else{
+        $update = "UPDATE users set `langID` = 1 where id = $id ";
+        mysqli_query($conn,$update);
+    }
+}
+
+if(isset($_POST['signout'])){
+    session_unset();
+    session_destroy();
+    path('login.php');
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,12 +37,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/images/logo.jpeg" type="image/x-icon">
     <title>Hours</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Clicker+Script&family=Inter:wght@400;700;800&family=Jost:wght@100;300;400;500;600&family=Kumbh+Sans:wght@400;700&family=Nanum+Gothic:wght@400;700;800&family=Overpass:wght@400;700&family=Plus+Jakarta+Sans:wght@200;300;400;600&family=Poppins:wght@400;500;600&family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Clicker+Script&family=Inter:wght@400;700;800&family=Jost:wght@100;300;400;500;600&family=Kumbh+Sans:wght@400;700&family=Nanum+Gothic:wght@400;700;800&family=Overpass:wght@400;700&family=Plus+Jakarta+Sans:wght@200;300;400;600&family=Poppins:wght@400;500;600&family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- css Files -->
@@ -33,6 +59,7 @@
     </div>
     <!-- End loading page -->
 
+   
     <!-- mode and translate -->
     <div class="slide-text">
         <div class="row">
@@ -43,7 +70,11 @@
             </div>
             <div class="col-lg-2">
                 <span class="trans">
-                    <a onclick="State()"> <i class="fa-solid fa-globe"></i></a>
+                    
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <button name="lang"> <i class="fa-solid fa-globe"></i></button>
+                        </form>
+                   
                 </span>
             </div>
         </div>
@@ -52,51 +83,41 @@
     <!-- End mode and translate -->
 
     <!-- start main English -->
-    <main class="English state" id="En">
+    <?php if($row['langID'] == 1 ) : ?>
+    <main class="English " id="En">
 
         <!-- start header -->
         <header>
             <div class="Navbar p-3">
                 <nav class="navbar navbar-expand-lg ">
                     <div class="container-fluid">
-                        <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s"
-                            href="#">HORUS</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
+                        <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">HORUS</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse " id="navbarNav">
                             <ul class="navbar-nav m-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link  animate__animated animate__bounceInUp active"
-                                        data-wow-delay="1s" aria-current="page" href="#">Home</a>
+                                    <a class="nav-link  animate__animated animate__bounceInUp active" data-wow-delay="1s" aria-current="page" href="#">Home</a>
                                 </li>
                                 <li class="nav-item nav-after">
-                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s"
-                                        href="#about">About us</a>
+                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#about">About us</a>
                                 </li>
                                 <li class="nav-item nav-after">
-                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s"
-                                        href="#team">Team</a>
+                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="#team">Team</a>
                                 </li>
                                 <li class="nav-item nav-after">
-                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s"
-                                        href="#services">Services</a>
+                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#services">Services</a>
                                 </li>
                                 <li class="nav-item nav-after">
-                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s"
-                                        href="booking.html">Booking</a>
+                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.html">Booking</a>
                                 </li>
                                 <li class="nav-item nav-after">
-                                    <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s"
-                                        href="contact.html">Contact</a>
+                                    <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.html">Contact</a>
                                 </li>
                             </ul>
                             <form class="d-flex m-auto header-login" role="search">
-                                <a href="login.php"
-                                    class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight"
-                                    data-wow-delay="1s">Login</a>
+                                <a href="login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">Login</a>
                             </form>
                         </div>
                     </div>
@@ -119,8 +140,7 @@
                         <h2 class="animate__animated animate__zoomIn " data-wow-delay=".5s">HORUS</h2>
                         <p class="animate__animated animate__rotateInUpRight " data-wow-delay=".5s">For Safety Travel
                         </p>
-                        <a href="#about"><button class="Btn animate__animated animate__rotateInUpRight "
-                                data-wow-delay="1s">Get
+                        <a href="#about"><button class="Btn animate__animated animate__rotateInUpRight " data-wow-delay="1s">Get
                                 Started</button></a>
                     </div>
 
@@ -149,8 +169,7 @@
 
 
                     <div class="col-lg-6  col-sm-12 col-md-12 right_side">
-                        <div class="first_pargrah col-lg-10  Right col-sm-12 col-md-12 animate__animated animate__flash "
-                            data-wow-delay=".5s">
+                        <div class="first_pargrah col-lg-10  Right col-sm-12 col-md-12 animate__animated animate__flash " data-wow-delay=".5s">
                             <p>system will help passengers to book tickets for means of transportation via the Internet.
                                 Where the
                                 system includes the departure times of the flight, the arrival of the flight, the number
@@ -160,8 +179,7 @@
 
                             </p>
                         </div>
-                        <div class="sec_pargrah col-lg-10  col-sm-12 col-md-12  Right animate__animated animate__flash "
-                            data-wow-delay=".5s">
+                        <div class="sec_pargrah col-lg-10  col-sm-12 col-md-12  Right animate__animated animate__flash " data-wow-delay=".5s">
                             <P>With the crowding of means of transportation, moving from one place to another has become
                                 more difficult
                                 for passengers, for many reasons, including that the passenger does not want to wait
@@ -387,8 +405,7 @@
 
 
 
-                    <div class="col-lg-4 col-md-6 offset-2 mt-4 animate__animated animate__bounceInRight "
-                        data-wow-delay=".5s">
+                    <div class="col-lg-4 col-md-6 offset-2 mt-4 animate__animated animate__bounceInRight " data-wow-delay=".5s">
                         <div class="card_four  card">
 
 
@@ -421,8 +438,7 @@
 
 
 
-                    <div class="col-lg-4  col-md-6 response-center mt-4 animate__animated animate__bounceInLeft "
-                        data-wow-delay=".5s">
+                    <div class="col-lg-4  col-md-6 response-center mt-4 animate__animated animate__bounceInLeft " data-wow-delay=".5s">
                         <div class="card_five  card">
 
 
@@ -522,6 +538,7 @@
         </footer>
         <!-- end footer -->
     </main>
+    <?php else : ?>
     <!-- End main English -->
 
     <!-- start main Arabic -->
@@ -531,48 +548,43 @@
             <div class="Navbar p-3">
                 <nav class="navbar navbar-expand-lg ">
                     <div class="container-fluid">
-                        <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s"
-                            href="#">HORUS
+                        <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">HORUS
                         </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse " id="navbarNav">
                             <ul class="navbar-nav m-auto">
                                 <li class="nav-item active_ar active_ar6">
-                                    <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s"
-                                        href="contact.html">الاتصال بنا</a>
+                                    <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.html">الاتصال بنا</a>
                                 </li>
                                 <li class="nav-item active_ar active_ar5 ">
-                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s"
-                                        href="booking.html">الحجز</a>
+                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.html">الحجز</a>
                                 </li>
                                 <li class="nav-item active_ar active_ar4">
-                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s"
-                                        href="#services_Ar">الخدمات</a>
+                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#services_Ar">الخدمات</a>
                                 </li>
                                 <li class="nav-item active_ar active_ar3">
-                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s"
-                                        href="#team_Ar">الفريق</a>
+                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="#team_Ar">الفريق</a>
                                 </li>
                                 <li class="nav-item active_ar active_ar2 ">
-                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s"
-                                        href="#aboutus">من نحن</a>
+                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#aboutus">من نحن</a>
                                 </li>
                                 <li class="nav-item active_ar active_ar1">
-                                    <a class="nav-link  animate__animated animate__bounceInUp " data-wow-delay="1s"
-                                        aria-current="page" href="#">الصفحة الرئيسية
+                                    <a class="nav-link  animate__animated animate__bounceInUp " data-wow-delay="1s" aria-current="page" href="#">الصفحة الرئيسية
                                     </a>
                                 </li>
                             </ul>
 
-                            <form class="d-flex m-auto header-login" role="search">
-                                <a href="login.html"
-                                    class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight"
-                                    data-wow-delay="1s">تسجيل الدخول</a>
+                            <?php if(isset($_SESSION['admins'])): ?>
+                            <form class="d-flex m-auto header-login" method="post" role="search">
+                                <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الخروج</button>
                             </form>
+                            <?php else : ?>
+                            <form class="d-flex m-auto header-login" role="search">
+                                <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الدخول</a>
+                            </form>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </nav>
@@ -621,15 +633,13 @@
 
 
                     <div class="col-lg-6  col-sm-12 col-md-12 right_side">
-                        <div class="first_pargrah col-lg-10  Right col-sm-12 col-md-12 animate__animated animate__flash "
-                            data-wow-delay=".5s">
+                        <div class="first_pargrah col-lg-10  Right col-sm-12 col-md-12 animate__animated animate__flash " data-wow-delay=".5s">
                             <p>سيساعد النظام المسافرين على حجز تذاكر وسائل النقل عبر الإنترنت. حيث يشمل النظام مواعيد
                                 المغادرة
                                 والوصول للرحلات، عدد المقاعد المتاحة ووجهة الرحلة.
                             </p>
                         </div>
-                        <div class="sec_pargrah col-lg-10  col-sm-12 col-md-12  Right animate__animated animate__flash "
-                            data-wow-delay=".5s">
+                        <div class="sec_pargrah col-lg-10  col-sm-12 col-md-12  Right animate__animated animate__flash " data-wow-delay=".5s">
                             <P>مع ازدحام وسائل النقل، أصبح الانتقال من مكان إلى آخر أصعب على المسافرين لأسباب عدة، بما
                                 في ذلك عدم
                                 رغبة المسافر في الانتظار طويلاً للانتقال إلى المكان الذي يريده. سيجعل هذا المشروع الأمر
@@ -846,8 +856,7 @@
 
 
 
-                    <div class="col-lg-4 col-md-6 offset-2 mt-4 animate__animated animate__bounceInRight "
-                        data-wow-delay=".5s">
+                    <div class="col-lg-4 col-md-6 offset-2 mt-4 animate__animated animate__bounceInRight " data-wow-delay=".5s">
                         <div class="card_four  card">
 
 
@@ -880,8 +889,7 @@
 
 
 
-                    <div class="col-lg-4  col-md-6 response-center mt-4 animate__animated animate__bounceInLeft "
-                        data-wow-delay=".5s">
+                    <div class="col-lg-4  col-md-6 response-center mt-4 animate__animated animate__bounceInLeft " data-wow-delay=".5s">
                         <div class="card_five  card">
 
 
@@ -929,7 +937,7 @@
                                     شارع آدم A108<br>
                                     نيويورك 535022، الولايات المتحدة الأمريكية<br><br>
                                     <strong>الهاتف:</strong> +1 5589 55488 55<br>
-                                     البريد الالكتروني :<strong> info@example.com </strong>
+                                    البريد الالكتروني :<strong> info@example.com </strong>
                                 </p>
                                 <div class="social-links mt-3">
                                     <a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
@@ -1003,6 +1011,8 @@
 
 
     </main>
+
+    <?php endif; ?>
     <!-- End main Arabic -->
 
     <a href=" #"><button class="to-up" id="top"><i class="fa-solid fa-chevron-up"></i></button></a>

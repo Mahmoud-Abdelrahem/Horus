@@ -42,7 +42,7 @@
             </div>
             <div class="col-lg-2">
                 <span class="trans">
-                    <a href=""> <i class="fa-solid fa-globe"></i></a>
+                    <a onclick="State()"> <i class="fa-solid fa-globe"></i></a>
                 </span>
             </div>
         </div>

@@ -1,19 +1,53 @@
 <?php
-include "configDB/config.php";
+include "app/config.php";
+include "app/functions.php";
+
+$select = "SELECT * FROM users ";
+$s = mysqli_query($conn, $select);
+
+
+$emailError = [];
+$emailError2 = [];
+$name = "";
+$email = '';
+$phone = null;
 
 
 
 
 if (isset($_POST['signup'])) {
-    $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
-    $confirmPass = $_POST['confirm'];
+    $name = filterValidation($_POST['name']);
+    $phone =  $_POST['phone'];
+    $email = filterValidation($_POST['email']);
+    $pass = filterValidation($_POST['pass']);
+    $confirmPass = filterValidation($_POST['confirm']);
 
-    $insert = "INSERT INTO `users` VALUES (null , '$name',$phone, '$email' , '$pass' , '$confirmPass' )";
-    $i = mysqli_query($conn, $insert);
-    header("location: /Horus/login.php");
+
+    if ($email == "" || $pass == "" || $phone == '' || $name == '' || $confirmPass == "") {
+        $emailErorr[] = "Email Or Password Can Not Be Empty";
+        $emailErorr2[] = 'لا يمكن ان يكون اسم المستخدم وكلمة المرور فارغين';
+    } else if (stringValidation($name, 4)) {
+        $emailErorr[] = "please enter valid name more than 4 characters";
+        $emailErorr2[] = 'ادخل اسم لا يقل عن اربع حروف';
+    } else if ($pass != $confirmPass) {
+        $emailErorr[] = "Password and Confirm Password do not match";
+        $emailErorr2[] = 'كلمة المرور وتاكيد كلمة المرور غير متشابهين';
+    } else if (stringValidation($pass, 8)) {
+        $emailErorr[] = "Password must be more than 8 characters";
+        $emailErorr2[] = 'كلمة المرور يجب ان تكون اكثر من 8 احرف';
+    }
+    foreach ($s as $data) {
+        if ($data['email'] == $email) {
+            $emailErorr[] = "Email is not available";
+            $emailErorr2[] = "هذا الايميل موجود سابقاً";
+        }
+    }
+
+    if (empty($emailErorr) && empty($emailErorr2)) {
+        $insert = "INSERT INTO users values (null,'$name',$phone,'$email','$pass' , '$confirmPass')";
+        $i = mysqli_query($conn, $insert);
+        // path("login.php");
+    }
 }
 
 
@@ -100,44 +134,52 @@ if (isset($_POST['signup'])) {
 
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="Enter your username" name="name">
+                                <input class="emailInput" type="text" placeholder="Enter your username" name="name" required value="<?= $name ?>">
                                 <i class="icon fa-solid fa-user"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">username can't be blank</div>
+
                         </div>
+
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="Enter your mobile phone" name="phone">
+                                <input class="emailInput" type="text" placeholder="Enter your mobile phone" name="phone" value="<?= $phone ?>" required>
                                 <i class="icon fa-solid fa-phone"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">mobile phone be blank</div>
                         </div>
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="enter your email" name="email">
+                                <input class="emailInput" type="text" placeholder="enter your email" name="email" value="<?= $email ?>" required>
                                 <i class="icon fa-solid fa-envelope"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">email can't be blank</div>
+
                         </div>
                         <div class="field password">
                             <div class="input-area">
-                                <input class="passInput" type="password" placeholder="enter your password" name="pass">
+                                <input class="passInput" type="password" placeholder="enter your password" name="pass" required>
                                 <i class="icon fa-solid fa-lock"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">password can't be blank</div>
                         </div>
                         <div class="field password">
                             <div class="input-area">
-                                <input class="passInput" type="password" placeholder="Confirm your password" name="confirm">
+                                <input class="passInput" type="password" placeholder="Confirm your password" name="confirm" required>
                                 <i class="icon fa-solid fa-lock"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">password can't be blank</div>
+
                         </div>
+                        <?php if (!empty($emailErorr)) : ?>
+                            <div class="alert alert-danger mt-3">
+                                <ul>
+                                    <?php foreach ($emailErorr as $error) : ?>
+                                        <li><?= $error ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
 
                         <button class="form-control btn w-100 mt-3" name="signup">sign up</button>
                     </form>
@@ -175,50 +217,55 @@ if (isset($_POST['signup'])) {
                 </div>
 
                 <!-- البدء في الجانب الأيمن -->
-                <div class="right-side animate__animated animate__bounceInRight" data-wow-delay=".5s" >
+                <div class="right-side animate__animated animate__bounceInRight" data-wow-delay=".5s">
                     <header>نموذج التسجيل</header>
-                    <form  method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data">
 
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="أدخل اسم المستخدم الخاص بك" name="name">
+                                <input class="emailInput" type="text" placeholder="أدخل اسم المستخدم الخاص بك" name="name" required value="<?= $name ?>">
                                 <i class="icon fa-solid fa-user"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">لا يمكن أن يكون اسم المستخدم فارغًا</div>
                         </div>
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="أدخل رقم هاتفك المحمول" name="phone">
+                                <input class="emailInput" type="text" placeholder="أدخل رقم هاتفك المحمول" name="phone" required value="<?= $phone ?>">
                                 <i class="icon fa-solid fa-phone"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">لا يمكن أن يكون رقم الجوال فارغًا</div>
                         </div>
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="أدخل عنوان بريدك الإلكتروني" name="email">
+                                <input class="emailInput" type="text" placeholder="أدخل عنوان بريدك الإلكتروني" name="email" required value="<?= $email ?>">
                                 <i class="icon fa-solid fa-envelope"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">لا يمكن أن يكون البريد الإلكتروني فارغًا</div>
                         </div>
                         <div class="field password">
                             <div class="input-area">
-                                <input class="passInput" type="password" placeholder="أدخل كلمة المرور" name="pass">
+                                <input class="passInput" type="password" placeholder="أدخل كلمة المرور" name="pass" required>
                                 <i class="icon fa-solid fa-lock"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">لا يمكن أن تكون كلمة المرور فارغةً</div>
                         </div>
                         <div class="field password">
                             <div class="input-area">
-                                <input class="passInput" type="password" placeholder="تأكيد كلمة المرور" name="confirm">
+                                <input class="passInput" type="password" placeholder="تأكيد كلمة المرور" name="confirm" required>
                                 <i class="icon fa-solid fa-lock"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
-                            <div class="error error-txt">لا يمكن أن تكون كلمة المرور فارغةً</div>
                         </div>
+
+                        <?php if (!empty($emailErorr2)) : ?>
+                            <div class="alert alert-danger mt-3">
+                                <ul>
+                                    <?php foreach ($emailErorr2 as $error) : ?>
+                                        <li><?= $error ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
 
                         <button class="btn btn-sign w-100 mt-3" name="signup">تسجيل</button>
                     </form>
