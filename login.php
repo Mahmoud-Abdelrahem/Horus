@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
-<body>
+<body class="dark">
 
     <!-- Start loading page -->
     <div class="loading-spiner">
@@ -32,13 +32,13 @@
     <div class="slide-text">
         <div class="row">
             <div class="col-lg-2 ">
-                <span class="moon">
-                    <a href=""><i class="fa-solid fa-moon"></i></a>
+                <span class="moon ">
+                    <a onclick="myFunction()"><i class="fa-solid fa-moon moon-dark" id="btnMode"></i></a>
                 </span>
             </div>
             <div class="col-lg-2">
                 <span class="trans">
-                    <a href=""> <i class="fa-solid fa-globe"></i></a>
+                    <a onclick="State()"> <i class="fa-solid fa-globe"></i></a>
                 </span>
             </div>
         </div>
@@ -77,7 +77,7 @@
                     <div class="col-lg-6 mt-5">
                         <div class="right-side animate__animated animate__bounceInRight" data-wow-delay=".5s">
                             <header>login form</header>
-                            <form action="./index.html">
+                            <form >
                                 <div class="field email">
                                     <div class="input-area">
                                         <input class="emailInput" type="text" placeholder="enter your email">
@@ -100,7 +100,7 @@
                                 <a href="index.html" class="form-control btn w-100">Login</a>
                             </form>
                             <div class="signupLink">
-                                not yet member ? <a href="register.html">sign up now</a>
+                                not yet member ? <a href="/Horus/register.php">sign up now</a>
                             </div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
                     <div class="col-lg-6 mt-5">
                         <div class="right-side animate__animated animate__bounceInRight" data-wow-delay=".5s">
                             <header>نموذج تسجيل الدخول</header>
-                            <form action="./index.html">
+                            <form>
                                 <div class="field email">
                                     <div class="input-area">
                                         <input class="emailInput" type="text" placeholder="أدخل بريدك الإلكتروني">
@@ -155,6 +155,29 @@
                                         <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                                     </div>
                                     <div class="error error-txt">لا يمكن ان يكون البريد الالكتروني</div>
+                                </div>
+                                <div class="field password">
+                                    <div class="input-area">
+                                        <input class="passInput" type="password" placeholder="ادخل كلمة المرور">
+                                        <i class="icon fa-solid fa-lock"></i>
+                                        <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                                    </div>
+                                    <div class="error error-txt">كلمة السر لا يمكن ان تكون فارغة</div>
+                                </div>
+                                <div class="forgetLink">
+                                    <a href="#">هل نسيت كلمة المرور ؟</a>
+                                </div>
+                                <a href="index.html" class="form-control btn w-100">تسجيل الدخول</a>
+                            </form>
+                            <div class="signupLink">
+                                لست مشترك بعد ؟ <a href="/Horus/register.php">أحصل على ايميل الان </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
     </main>
 
 

@@ -1,3 +1,25 @@
+<?php
+include "configDB/config.php";
+
+
+
+
+if (isset($_POST['signup'])) {
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $pass = $_POST['pass'];
+    $confirmPass = $_POST['confirm'];
+
+    $insert = "INSERT INTO `users` VALUES (null , '$name',$phone, '$email' , '$pass' , '$confirmPass' )";
+    $i = mysqli_query($conn, $insert);
+    header("location: /Horus/login.php");
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,12 +29,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/images/logo.jpeg" type="image/x-icon">
     <title>Register | انشاء ايميل</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Clicker+Script&family=Inter:wght@400;700;800&family=Jost:wght@100;300;400;500;600&family=Kumbh+Sans:wght@400;700&family=Nanum+Gothic:wght@400;700;800&family=Overpass:wght@400;700&family=Plus+Jakarta+Sans:wght@200;300;400;600&family=Poppins:wght@400;500;600&family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Clicker+Script&family=Inter:wght@400;700;800&family=Jost:wght@100;300;400;500;600&family=Kumbh+Sans:wght@400;700&family=Nanum+Gothic:wght@400;700;800&family=Overpass:wght@400;700&family=Plus+Jakarta+Sans:wght@200;300;400;600&family=Poppins:wght@400;500;600&family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- css Files -->
@@ -78,18 +96,11 @@
                 <!-- start right side -->
                 <div class="right-side animate__animated animate__bounceInRight" data-wow-delay=".5s">
                     <header>registration form</header>
-                    <form action="#">
+                    <form method="post" enctype="multipart/form-data">
+
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="enter your national ID">
-                                <i class="icon fa-solid fa-id-badge text-icon"></i>
-                                <i class="error error-icon fa-solid fa-circle-exclamation"></i>
-                            </div>
-                            <div class="error error-txt">ID can't be blank</div>
-                        </div>
-                        <div class="field email">
-                            <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="enter your username">
+                                <input class="emailInput" type="text" placeholder="Enter your username" name="name">
                                 <i class="icon fa-solid fa-user"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
@@ -97,7 +108,7 @@
                         </div>
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="enter your mobile phone">
+                                <input class="emailInput" type="text" placeholder="Enter your mobile phone" name="phone">
                                 <i class="icon fa-solid fa-phone"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
@@ -105,7 +116,7 @@
                         </div>
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="enter your email">
+                                <input class="emailInput" type="text" placeholder="enter your email" name="email">
                                 <i class="icon fa-solid fa-envelope"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
@@ -113,7 +124,7 @@
                         </div>
                         <div class="field password">
                             <div class="input-area">
-                                <input class="passInput" type="password" placeholder="enter your password">
+                                <input class="passInput" type="password" placeholder="enter your password" name="pass">
                                 <i class="icon fa-solid fa-lock"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
@@ -121,14 +132,14 @@
                         </div>
                         <div class="field password">
                             <div class="input-area">
-                                <input class="passInput" type="password" placeholder="Confirm your password">
+                                <input class="passInput" type="password" placeholder="Confirm your password" name="confirm">
                                 <i class="icon fa-solid fa-lock"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
                             <div class="error error-txt">password can't be blank</div>
                         </div>
 
-                        <a href="login.html" class="form-control btn w-100 mt-3">sign up</a>
+                        <button class="form-control btn w-100 mt-3" name="signup">sign up</button>
                     </form>
 
                 </div>
@@ -164,20 +175,13 @@
                 </div>
 
                 <!-- البدء في الجانب الأيمن -->
-                <div class="right-side animate__animated animate__bounceInRight" data-wow-delay=".5s">
+                <div class="right-side animate__animated animate__bounceInRight" data-wow-delay=".5s" >
                     <header>نموذج التسجيل</header>
-                    <form action="#">
+                    <form  method="post" enctype="multipart/form-data">
+
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="أدخل رقم الهوية الوطنية الخاص بك">
-                                <i class="icon fa-solid fa-id-badge text-icon float-left"></i>
-                                <i class="error error-icon fa-solid fa-circle-exclamation"></i>
-                            </div>
-                            <div class="error error-txt">لا يمكن أن يكون رقم الهوية فارغًا</div>
-                        </div>
-                        <div class="field email">
-                            <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="أدخل اسم المستخدم الخاص بك">
+                                <input class="emailInput" type="text" placeholder="أدخل اسم المستخدم الخاص بك" name="name">
                                 <i class="icon fa-solid fa-user"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
@@ -185,7 +189,7 @@
                         </div>
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="أدخل رقم هاتفك المحمول">
+                                <input class="emailInput" type="text" placeholder="أدخل رقم هاتفك المحمول" name="phone">
                                 <i class="icon fa-solid fa-phone"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
@@ -193,7 +197,7 @@
                         </div>
                         <div class="field email">
                             <div class="input-area">
-                                <input class="emailInput" type="text" placeholder="أدخل عنوان بريدك الإلكتروني">
+                                <input class="emailInput" type="text" placeholder="أدخل عنوان بريدك الإلكتروني" name="email">
                                 <i class="icon fa-solid fa-envelope"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
@@ -201,7 +205,7 @@
                         </div>
                         <div class="field password">
                             <div class="input-area">
-                                <input class="passInput" type="password" placeholder="أدخل كلمة المرور">
+                                <input class="passInput" type="password" placeholder="أدخل كلمة المرور" name="pass">
                                 <i class="icon fa-solid fa-lock"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
@@ -209,14 +213,14 @@
                         </div>
                         <div class="field password">
                             <div class="input-area">
-                                <input class="passInput" type="password" placeholder="تأكيد كلمة المرور">
+                                <input class="passInput" type="password" placeholder="تأكيد كلمة المرور" name="confirm">
                                 <i class="icon fa-solid fa-lock"></i>
                                 <i class="error error-icon fa-solid fa-circle-exclamation"></i>
                             </div>
                             <div class="error error-txt">لا يمكن أن تكون كلمة المرور فارغةً</div>
                         </div>
 
-                        <a href="login.html" class="form-control btn w-100 mt-3">تسجيل</a>
+                        <button class="btn btn-sign w-100 mt-3" name="signup">تسجيل</button>
                     </form>
 
                 </div>
