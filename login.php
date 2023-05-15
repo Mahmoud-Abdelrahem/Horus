@@ -2,61 +2,43 @@
 
 include 'app/config.php';
 include 'app/functions.php';
+include 'shared/head.php';
 session_start();
 
-$select = "SELECT * FROM users";
-$s =  mysqli_query($conn, $select);
-$row = mysqli_fetch_assoc($s);
-$numRows = mysqli_num_rows($s);
+
 $emailErorr = [];
 $emailErorr2 = [];
-$emailErorr3 = [];
+
 
 
 if (isset($_POST['login'])) {
     $email = filterValidation($_POST['email']);
     $pass = filterValidation($_POST['pass']);
-
+    $select = "SELECT * FROM users where email = '$email' and password = '$pass'";
+    $s =  mysqli_query($conn, $select);
+    $row = mysqli_fetch_assoc($s);
+    $numRows = mysqli_num_rows($s);
 
     if ($email == "" || $pass == "") {
         $emailErorr[] = "Email Or Password Can Not Be Empty";
         $emailErorr2[] = 'لا يمكن ان يكون اسم المستخدم وكلمة المرور فارغين';
-    } elseif ($row['email'] != $email || $row['password'] != $pass) {
-        $emailErorr[] = 'Wrong password or email';
-        $emailErorr2[] = 'حطأ في اسم المستخدم او كلمة المرور';
-    } else {
-        $_SESSION['admins'] = [
+    }  if ($numRows == 1) {
+        $_SESSION['users'] = [
             "email" => $email,
             "langID" => $row['langID'],
             "id" => $row['id']
         ];
+      
         path("index.php");
+    } else {
+        $emailErorr[] = 'Wrong password or email';
+        $emailErorr2[] = 'حطأ في اسم المستخدم او كلمة المرور';
     }
 }
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/images/Make up Artist Logo.png" type="image/x-icon">
-    <title>Hours</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Clicker+Script&family=Inter:wght@400;700;800&family=Jost:wght@100;300;400;500;600&family=Kumbh+Sans:wght@400;700&family=Nanum+Gothic:wght@400;700;800&family=Overpass:wght@400;700&family=Plus+Jakarta+Sans:wght@200;300;400;600&family=Poppins:wght@400;500;600&family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <!-- css files -->
-    <link rel="stylesheet" href="assets/vendor/WOW/animate.min.css">
-    <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-</head>
-
-<body class="dark">
 
     <!-- Start loading page -->
     <div class="loading-spiner">
@@ -142,7 +124,7 @@ if (isset($_POST['login'])) {
                                 <div class="forgetLink">
                                     <a href="#">forget password ?</a>
                                 </div>
-                                <button class="form-control btn w-100" name="login">Login</button>
+                                <button class="form-control btn w-100 btn-sign" name="login">Login</button>
                             </form>
                             <div class="signupLink">
                                 not yet member ? <a href="/Horus/register.php">sign up now</a>
@@ -241,10 +223,6 @@ if (isset($_POST['login'])) {
     <!--end login-->
 
 
-    <script src="assets/vendor/jQuery/jquery-3.6.1.min.js"></script>
-    <script src="assets/vendor/bootstrap/bootstrap.js"></script>
-    <script src="assets/vendor/WOW/wow.min.js"></script>
-    <script src="assets/js/main.js"></script>
-</body>
-
-</html>
+   <?php 
+   include 'shared/script.php';
+   ?>
