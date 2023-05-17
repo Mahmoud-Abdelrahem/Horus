@@ -2,28 +2,74 @@
 include 'app/config.php';
 include 'app/functions.php';
 include 'shared/head.php';
-session_start();
 
-$select = "SELECT * FROM users";
-$s =  mysqli_query($conn, $select);
-$row = mysqli_fetch_assoc($s);
-$numRows = mysqli_num_rows($s);
+$select2 = "SELECT * FROM places";
+$plac = mysqli_query($conn, $select2);
+
+
+
+
 
 if (isset($_SESSION['users'])) {
+    
+    
+    $select = "SELECT * FROM users where id =$id";
+    $s =  mysqli_query($conn, $select);
+    $row = mysqli_fetch_assoc($s);
+    $numRows = mysqli_num_rows($s);
     $id = $_SESSION['users']['id'];
+    
+   
+    
+    
+    // make variables empty
+    $emailError = [];
+    $emailError2 = [];
+    
+    if (isset($_POST['search'])) {
+        auth(1, 2);
+        
+        $pic = $_POST['picupLocation'];
+        $des = $_POST['destination'];
+        $_SESSION['bus'] = [
+            'pickup' => $pic,
+            'destination' => $des
+            
+        ];
+        path('search.php');
+        // path('index.php');
+    }
+
     if (isset($_SESSION['users'])) {
         if (isset($_POST['lang'])) {
             if ($row['langID'] == 1) {
                 $update = "UPDATE users set `langID` = 2  where id = $id";
                 mysqli_query($conn, $update);
+                path('booking.php');
             } else {
                 $update = "UPDATE users set `langID` = 1 where id = $id ";
                 mysqli_query($conn, $update);
+                path('booking.php');
+            }
+        }
+
+
+        if (isset($_POST['mode'])) {
+            if ($row['modeID'] == 1) {
+                $update = "UPDATE users set `modeID` = 2  where id = $id";
+                mysqli_query($conn, $update);
+                path('booking.php');
+            } else {
+                $update = "UPDATE users set `modeID` = 1 where id = $id ";
+                mysqli_query($conn, $update);
+                path("booking.php");
             }
         }
     } else {
         path("login.php");
     }
+} else if (isset($_POST['search'])) {
+    auth(1, 2);
 }
 
 if (isset($_POST['signout'])) {
@@ -31,6 +77,7 @@ if (isset($_POST['signout'])) {
     session_destroy();
     path('login.php');
 }
+
 
 ?>
 
@@ -47,13 +94,16 @@ if (isset($_POST['signout'])) {
         <div class="row">
             <div class="col-lg-2 ">
                 <span class="moon ">
-                    <a onclick="myFunction()"><i class="fa-solid fa-moon moon-dark" id="btnMode"></i></a>
+                    <form method="post" enctype="multipart/form-data">
+                        <button name="mode" id="translate"><i class="fa-solid fa-moon moon-dark"></i></button>
+
+                    </form>
                 </span>
             </div>
             <div class="col-lg-2">
                 <span class="trans">
 
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data">
                         <button name="lang" id="translate"> <i class="fa-solid fa-globe"></i></button>
                     </form>
 
@@ -67,7 +117,7 @@ if (isset($_POST['signout'])) {
 
 
 <?php if (isset($_SESSION['users'])) : ?>
-    <?php if ($row['langID'] == 1) : ?>
+    <?php if ($row['langID'] == 2) : ?>
         <!-- start main english -->
         <main class="English" id="En">
             <header>
@@ -81,16 +131,16 @@ if (isset($_POST['signout'])) {
                             <div class="collapse navbar-collapse " id="navbarNav">
                                 <ul class="navbar-nav m-auto">
                                     <li class="nav-item nav-after">
-                                        <a class="nav-link  animate__animated animate__bounceInUp " data-wow-delay="1s" aria-current="page" href="#">Home</a>
+                                        <a class="nav-link  animate__animated animate__bounceInUp " data-wow-delay="1s" aria-current="page" href="index.php">Home</a>
                                     </li>
                                     <li class="nav-item nav-after">
-                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#about">About us</a>
+                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="index.php#about">About us</a>
                                     </li>
                                     <li class="nav-item nav-after">
-                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="#team">Team</a>
+                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="index.php#team">Team</a>
                                     </li>
                                     <li class="nav-item nav-after">
-                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#services">Services</a>
+                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="index.php#services">Services</a>
                                     </li>
                                     <li class="nav-item ">
                                         <a class="nav-link animate__animated animate__bounceInUp active" data-wow-delay="1s" href="booking.php">Booking</a>
@@ -122,46 +172,34 @@ if (isset($_POST['signout'])) {
                     <div class="row justify-content-center">
                         <div class="col-lg-8 booking-content">
                             <div class="info text-center animate__animated animate__jackInTheBox" data-wow-delay="1s">
-                                <h1>Book A Bus</h1>
+                                <h1>Search For Bus</h1>
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-12 p-4  info-form">
-                            <form action="">
+                            <form action="" method="post">
                                 <div class="form-group">
-                                    <div class="col-lg-6 col-md-6 form-group-content animate__animated animate__zoomInRight" data-wow-delay="1.5s">
-                                        <input type="text" class="form-control" placeholder="Enter Your name">
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 form-group-content animate__animated animate__zoomInLeft" data-wow-delay="1.5s">
-                                        <input type="email" class="form-control" placeholder="Enter Your Email">
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 form-group-content animate__animated animate__bounceIn" data-wow-delay="1.5s">
-                                        <input type="number" class="form-control" placeholder="Phone Number">
-                                    </div>
+
                                     <div class="col-lg-6 col-md-6 form-group-content mt-3 animate__animated animate__slideInLeft" data-wow-delay="1.5s">
                                         <label for="" class="">Picup Location</label>
-                                        <select name="" id="" class="form-control form-select">
-                                            <option value="">sohag university</option>
-                                            <option value="">tahta</option>
+                                        <select name="picupLocation" id="" class="form-control form-select">
+                                            <?php foreach ($plac as $data) : ?>
+                                                <option value="<?= $data['places'] ?>"><?= $data['places'] ?></option>
+                                            <?php endforeach; ?>
+
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 mt-3 form-group-content animate__animated animate__slideInRight" data-wow-delay="1.5s">
                                         <label for="">Destination</label>
-                                        <select name="" id="" class="form-control form-select">
-                                            <option value="">sohag university</option>
-                                            <option value="">tahta</option>
+                                        <select name="destination" id="" class="form-control form-select">
+                                            <?php foreach ($plac as $data) : ?>
+                                                <option value="<?= $data['places'] ?>"><?= $data['places'] ?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6 mt-2 form-group-content animate__animated animate__bounceInUp" data-wow-delay="1s">
-                                        <label for="">Picup Date</label>
-                                        <input type="date" class="form-control" placeholder="Phone Number">
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 mt-2 form-group-content animate__animated animate__bounceInDown" data-wow-delay="1s">
-                                        <label for="">Picup Time</label>
-                                        <input type="time" class="form-control" placeholder="Phone Number">
-                                    </div>
+
                                     <div class="col-lg-12 col-md-12 mt-2 form-group-content animate__animated animate__zoomIn" data-wow-delay=".5s">
-                                        <button class="booking-btn">Book now</button>
+                                        <button class="booking-btn" name="search">Search <i class="fa-solid fa-magnifying-glass"></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -193,25 +231,25 @@ if (isset($_POST['signout'])) {
                                     <li class="nav-item active_ar active_ar6">
                                         <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.php">الاتصال بنا</a>
                                     </li>
-                                    <li class="nav-item active_ar active_ar5 ">
+                                    <li class="nav-item active_ar active_ar5 active ">
                                         <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.php">الحجز</a>
                                     </li>
                                     <li class="nav-item active_ar active_ar4">
-                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#services_Ar">الخدمات</a>
+                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="index.php#services_Ar">الخدمات</a>
                                     </li>
                                     <li class="nav-item active_ar active_ar3">
-                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="#team_Ar">الفريق</a>
+                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="index.php#team_Ar">الفريق</a>
                                     </li>
                                     <li class="nav-item active_ar active_ar2 ">
-                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#aboutus">من نحن</a>
+                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="index.php#aboutus">من نحن</a>
                                     </li>
-                                    <li class="nav-item active_ar active_ar1">
+                                    <li class="nav-item active_ar active_ar6">
                                         <a class="nav-link  animate__animated animate__bounceInUp " data-wow-delay="1s" aria-current="page" href="index.php">الصفحة الرئيسية
                                         </a>
                                     </li>
                                 </ul>
 
-                                <?php if (isset($_SESSION['admins'])) : ?>
+                                <?php if (isset($_SESSION['users'])) : ?>
                                     <form class="d-flex m-auto header-login" method="post" role="search">
                                         <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الخروج</button>
                                     </form>
@@ -238,45 +276,32 @@ if (isset($_POST['signout'])) {
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-12 p-4  info-form">
-                            <form action="">
+                            <form action="" method="post">
                                 <div class="form-group">
-                                    <div class="col-lg-6 col-md-6 form-group-content animate__animated animate__zoomInRight" data-wow-delay="1.5s">
-                                        <input type="text" class="form-control" placeholder="أدخل اسمك">
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 form-group-content animate__animated animate__zoomInLeft" data-wow-delay="1.5s">
-                                        <input type="email" class="form-control" placeholder="أدخل بريدك الإلكتروني">
-                                    </div>
 
-
-                                    <div class="col-lg-12 col-md-12 form-group-content animate__animated animate__bounceIn" data-wow-delay="1.5s">
-                                        <input type="number" class="form-control" placeholder="رقم الهاتف">
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 form-group-content mt-3 animate__animated animate__slideInLeft" data-wow-delay="1.5s">
-                                        <label for="" class="">موقع الاستلام</label>
-                                        <select name="" id="" class="form-control form-select">
-                                            <option value="">جامعة سوهاج</option>
-                                            <option value="">طهطا</option>
-                                        </select>
-                                    </div>
                                     <div class="col-lg-6 col-md-6 mt-3 form-group-content animate__animated animate__slideInRight" data-wow-delay="1.5s">
-                                        <label for="">الوجهة</label>
-                                        <select name="" id="" class="form-control form-select">
-                                            <option value="">جامعة سوهاج</option>
-                                            <option value="">طهطا</option>
+                                        <label for="">الى</label>
+                                        <select name="destination" id="" class="form-control form-select">
+                                            <?php foreach ($plac as $data) : ?>
+                                                <option value="<?= $data['places'] ?>"><?= $data['places_ar'] ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 form-group-content mt-3 animate__animated animate__slideInLeft" data-wow-delay="1.5s">
+                                        <label for="" class="">من</label>
+                                        <select name="picupLocation" id="" class="form-control form-select">
+                                            <?php foreach ($plac as $data) : ?>
+                                                <option value="<?= $data['places'] ?>"><?= $data['places_ar'] ?></option>
+                                            <?php endforeach; ?>
+
                                         </select>
                                     </div>
 
 
-                                    <div class="col-lg-6 col-md-6 mt-2 form-group-content animate__animated animate__bounceInUp" data-wow-delay="1s">
-                                        <label for="">تاريخ الاستلام</label>
-                                        <input type="date" class="form-control" placeholder="رقم الهاتف">
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 mt-2 form-group-content animate__animated animate__bounceInDown" data-wow-delay="1s">
-                                        <label for="">وقت الاستلام</label>
-                                        <input type="time" class="form-control" placeholder="رقم الهاتف">
-                                    </div>
+
                                     <div class="col-lg-12 col-md-12 mt-2 form-group-content animate__animated animate__zoomIn" data-wow-delay=".5s">
-                                        <button class="booking-btn">حجز الآن</button>
+                                        <button class="booking-btn" name="search"> <i class="fa-solid fa-magnifying-glass"></i> بحث </button>
                                     </div>
                                 </div>
                             </form>
@@ -344,7 +369,7 @@ if (isset($_POST['signout'])) {
                                 </form>
                             <?php else : ?>
                                 <form class="d-flex m-auto header-login" role="search">
-                                    <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">Login </a>
+                                    <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> Login</a>
                                 </form>
                             <?php endif; ?>
                         </div>
@@ -361,46 +386,34 @@ if (isset($_POST['signout'])) {
                 <div class="row justify-content-center">
                     <div class="col-lg-8 booking-content">
                         <div class="info text-center animate__animated animate__jackInTheBox" data-wow-delay="1s">
-                            <h1>Book A Bus</h1>
+                            <h1>Search For Bus</h1>
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-12 p-4  info-form">
-                        <form action="">
+                        <form action="" method="post">
                             <div class="form-group">
-                                <div class="col-lg-6 col-md-6 form-group-content animate__animated animate__zoomInRight" data-wow-delay="1.5s">
-                                    <input type="text" class="form-control" placeholder="Enter Your name">
-                                </div>
-                                <div class="col-lg-6 col-md-6 form-group-content animate__animated animate__zoomInLeft" data-wow-delay="1.5s">
-                                    <input type="email" class="form-control" placeholder="Enter Your Email">
-                                </div>
-                                <div class="col-lg-12 col-md-12 form-group-content animate__animated animate__bounceIn" data-wow-delay="1.5s">
-                                    <input type="number" class="form-control" placeholder="Phone Number">
-                                </div>
+
                                 <div class="col-lg-6 col-md-6 form-group-content mt-3 animate__animated animate__slideInLeft" data-wow-delay="1.5s">
                                     <label for="" class="">Picup Location</label>
-                                    <select name="" id="" class="form-control form-select">
-                                        <option value="">sohag university</option>
-                                        <option value="">tahta</option>
+                                    <select name="picupLocation" id="" class="form-control form-select">
+                                        <?php foreach ($plac as $data) : ?>
+                                            <option value="<?= $data['picupLocation'] ?>"><?= $data['picupLocation'] ?></option>
+                                        <?php endforeach; ?>
+
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6 mt-3 form-group-content animate__animated animate__slideInRight" data-wow-delay="1.5s">
                                     <label for="">Destination</label>
-                                    <select name="" id="" class="form-control form-select">
-                                        <option value="">sohag university</option>
-                                        <option value="">tahta</option>
+                                    <select name="destination" id="" class="form-control form-select">
+                                        <?php foreach ($plac as $data) : ?>
+                                            <option value="<?= $data['destination'] ?>"><?= $data['destination'] ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
 
-                                <div class="col-lg-6 col-md-6 mt-2 form-group-content animate__animated animate__bounceInUp" data-wow-delay="1s">
-                                    <label for="">Picup Date</label>
-                                    <input type="date" class="form-control" placeholder="Phone Number">
-                                </div>
-                                <div class="col-lg-6 col-md-6 mt-2 form-group-content animate__animated animate__bounceInDown" data-wow-delay="1s">
-                                    <label for="">Picup Time</label>
-                                    <input type="time" class="form-control" placeholder="Phone Number">
-                                </div>
+
                                 <div class="col-lg-12 col-md-12 mt-2 form-group-content animate__animated animate__zoomIn" data-wow-delay=".5s">
-                                    <button class="booking-btn">Search <i class="fa-solid fa-magnifying-glass"></i></button>
+                                    <button class="booking-btn" name="search">Search </button>
                                 </div>
                             </div>
                         </form>
@@ -433,7 +446,7 @@ if (isset($_POST['signout'])) {
                                 <li class="nav-item active_ar active_ar6">
                                     <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.php">الاتصال بنا</a>
                                 </li>
-                                <li class="nav-item active_ar active_ar5 active">
+                                <li class="nav-item active_ar active_ar5 active ">
                                     <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.php">الحجز</a>
                                 </li>
                                 <li class="nav-item active_ar active_ar4">
@@ -451,7 +464,7 @@ if (isset($_POST['signout'])) {
                                 </li>
                             </ul>
 
-                            <?php if (isset($_SESSION['admins'])) : ?>
+                            <?php if (isset($_SESSION['users'])) : ?>
                                 <form class="d-flex m-auto header-login" method="post" role="search">
                                     <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الخروج</button>
                                 </form>
@@ -474,49 +487,37 @@ if (isset($_POST['signout'])) {
                 <div class="row justify-content-center">
                     <div class="col-lg-8 booking-content">
                         <div class="info text-center animate__animated animate__jackInTheBox" data-wow-delay="1s">
-                            <h1>حجز حافلة</h1>
+                            <h1> بحث عن حافلة</h1>
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-12 p-4  info-form">
-                        <form action="">
+                        <form action="" method="post">
                             <div class="form-group">
-                                <div class="col-lg-6 col-md-6 form-group-content animate__animated animate__zoomInRight" data-wow-delay="1.5s">
-                                    <input type="text" class="form-control" placeholder="أدخل اسمك">
-                                </div>
-                                <div class="col-lg-6 col-md-6 form-group-content animate__animated animate__zoomInLeft" data-wow-delay="1.5s">
-                                    <input type="email" class="form-control" placeholder="أدخل بريدك الإلكتروني">
-                                </div>
 
 
-                                <div class="col-lg-12 col-md-12 form-group-content animate__animated animate__bounceIn" data-wow-delay="1.5s">
-                                    <input type="number" class="form-control" placeholder="رقم الهاتف">
-                                </div>
-                                <div class="col-lg-6 col-md-6 form-group-content mt-3 animate__animated animate__slideInLeft" data-wow-delay="1.5s">
-                                    <label for="" class="">موقع الاستلام</label>
-                                    <select name="" id="" class="form-control form-select">
-                                        <option value="">جامعة سوهاج</option>
-                                        <option value="">طهطا</option>
-                                    </select>
-                                </div>
                                 <div class="col-lg-6 col-md-6 mt-3 form-group-content animate__animated animate__slideInRight" data-wow-delay="1.5s">
-                                    <label for="">الوجهة</label>
-                                    <select name="" id="" class="form-control form-select">
-                                        <option value="">جامعة سوهاج</option>
-                                        <option value="">طهطا</option>
+                                    <label for="">الى</label>
+                                    <select name="destination" id="" class="form-control form-select">
+                                        <?php foreach ($plac as $data) : ?>
+                                            <option value="<?= $data['places_ar'] ?>"><?= $data['places_ar'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 form-group-content mt-3 animate__animated animate__slideInLeft" data-wow-delay="1.5s">
+                                    <label for="" class="">من</label>
+                                    <select name="picupLocation" id="" class="form-control form-select">
+                                        <?php foreach ($plac as $data) : ?>
+                                            <option value="<?= $data['places_ar'] ?>"><?= $data['places_ar'] ?></option>
+                                        <?php endforeach; ?>
+
                                     </select>
                                 </div>
 
 
-                                <div class="col-lg-6 col-md-6 mt-2 form-group-content animate__animated animate__bounceInUp" data-wow-delay="1s">
-                                    <label for="">تاريخ الاستلام</label>
-                                    <input type="date" class="form-control" placeholder="رقم الهاتف">
-                                </div>
-                                <div class="col-lg-6 col-md-6 mt-2 form-group-content animate__animated animate__bounceInDown" data-wow-delay="1s">
-                                    <label for="">وقت الاستلام</label>
-                                    <input type="time" class="form-control" placeholder="رقم الهاتف">
-                                </div>
+
                                 <div class="col-lg-12 col-md-12 mt-2 form-group-content animate__animated animate__zoomIn" data-wow-delay=".5s">
-                                    <button class="booking-btn"><i class="fa-solid fa-magnifying-glass"></i> بحث </button>
+                                    <button class="booking-btn" name="search">بحث </button>
                                 </div>
                             </div>
                         </form>

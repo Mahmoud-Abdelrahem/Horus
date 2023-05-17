@@ -2,9 +2,6 @@
 include 'app/config.php';
 include 'app/functions.php';
 include 'shared/head.php';
-session_start();
-
-
 
 
 if (isset($_SESSION['users'])) {
@@ -20,6 +17,18 @@ if (isset($_SESSION['users'])) {
             path('index.php');
         } else {
             $update = "UPDATE users set `langID` = 1 where id = $id ";
+            mysqli_query($conn, $update);
+            path("index.php");
+        }
+    }
+
+    if (isset($_POST['mode'])) {
+        if ($row['modeID'] == 1) {
+            $update = "UPDATE users set `modeID` = 2  where id = $id";
+            mysqli_query($conn, $update);
+            path('index.php');
+        } else {
+            $update = "UPDATE users set `modeID` = 1 where id = $id ";
             mysqli_query($conn, $update);
             path("index.php");
         }
@@ -50,7 +59,10 @@ if (isset($_POST['signout'])) {
         <div class="row">
             <div class="col-lg-2 ">
                 <span class="moon ">
-                    <a onclick="myFunction()"><i class="fa-solid fa-moon moon-dark" id="btnMode"></i></a>
+                    <form method="post" enctype="multipart/form-data">
+                        <button name="mode" id="translate"><i class="fa-solid fa-moon moon-dark"></i></button>
+
+                    </form>
                 </span>
             </div>
             <div class="col-lg-2">
@@ -107,10 +119,13 @@ if (isset($_POST['signout'])) {
                                     <form class="d-flex m-auto header-login" method="post" role="search">
                                         <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">Logout </button>
                                     </form>
+                                    <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+
                                 <?php else : ?>
                                     <form class="d-flex m-auto header-login" role="search">
                                         <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> Login</a>
                                     </form>
+                                    <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -549,10 +564,10 @@ if (isset($_POST['signout'])) {
                             <div class="collapse navbar-collapse " id="navbarNav">
                                 <ul class="navbar-nav m-auto">
                                     <li class="nav-item active_ar active_ar6">
-                                        <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.html">الاتصال بنا</a>
+                                        <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.php">الاتصال بنا</a>
                                     </li>
                                     <li class="nav-item active_ar active_ar5 ">
-                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.html">الحجز</a>
+                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.php">الحجز</a>
                                     </li>
                                     <li class="nav-item active_ar active_ar4">
                                         <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#services_Ar">الخدمات</a>
@@ -564,7 +579,7 @@ if (isset($_POST['signout'])) {
                                         <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#aboutus">من نحن</a>
                                     </li>
                                     <li class="nav-item active_ar active_ar1">
-                                        <a class="nav-link  animate__animated animate__bounceInUp " data-wow-delay="1s" aria-current="page" href="#">الصفحة الرئيسية
+                                        <a class="nav-link  animate__animated animate__bounceInUp " data-wow-delay="1s" aria-current="page" href="index.php">الصفحة الرئيسية
                                         </a>
                                     </li>
                                 </ul>
@@ -573,10 +588,14 @@ if (isset($_POST['signout'])) {
                                     <form class="d-flex m-auto header-login" method="post" role="search">
                                         <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الخروج</button>
                                     </form>
+                                    <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+
                                 <?php else : ?>
                                     <form class="d-flex m-auto header-login" role="search">
                                         <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الدخول</a>
                                     </form>
+                                    <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -1044,7 +1063,7 @@ if (isset($_POST['signout'])) {
                         <div class="collapse navbar-collapse " id="navbarNav">
                             <ul class="navbar-nav m-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link  animate__animated animate__bounceInUp active" data-wow-delay="1s" aria-current="page" href="#">Home</a>
+                                    <a class="nav-link  animate__animated animate__bounceInUp active" data-wow-delay="1s" aria-current="page" href="index.php">Home</a>
                                 </li>
                                 <li class="nav-item nav-after">
                                     <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#about">About us</a>
@@ -1070,6 +1089,8 @@ if (isset($_POST['signout'])) {
                                 <form class="d-flex m-auto header-login" role="search">
                                     <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> Login</a>
                                 </form>
+                                <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+
                             <?php endif; ?>
                         </div>
                     </div>
@@ -1535,9 +1556,15 @@ if (isset($_POST['signout'])) {
                                     <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الخروج</button>
                                 </form>
                             <?php else : ?>
+
+                                
+                                
                                 <form class="d-flex m-auto header-login" role="search">
                                     <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الدخول</a>
                                 </form>
+                                <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+
+
                             <?php endif; ?>
                         </div>
                     </div>

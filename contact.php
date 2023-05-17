@@ -3,7 +3,6 @@
 include 'app/config.php';
 include 'app/functions.php';
 include 'shared/head.php';
-session_start();
 
 
 if (isset($_SESSION['users'])) {
@@ -16,11 +15,11 @@ if (isset($_SESSION['users'])) {
         if ($row['langID'] == 1) {
             $update = "UPDATE users set `langID` = 2  where id = $id";
             mysqli_query($conn, $update);
-            path('index.php');
+            path('contact.php');
         } else {
             $update = "UPDATE users set `langID` = 1 where id = $id ";
             mysqli_query($conn, $update);
-            path("index.php");
+            path("contact.php");
         }
     }
 }
@@ -67,7 +66,7 @@ if (isset($_POST['signout'])) {
 
 <?php if (isset($_SESSION['users'])) : ?>
     <?php if ($row['langID'] == 2) : ?>
-        <main class="English state" id="En">
+        <main class="English" id="En">
 
             <!-- start header -->
             <header>

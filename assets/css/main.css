@@ -64,6 +64,14 @@ a {
     text-decoration: none;
 }
 
+:root {
+    --overlaycolor: rgb(0 0 0 / 40%);
+    --main-color: rgba(247, 108, 15, 0.8);
+    ;
+    --text-color: #e6d5b5;
+
+}
+
 
 /*##################*/
 /* right-Buttons-mode */
@@ -231,7 +239,7 @@ header {
 
 }
 
-.contact-nav::after{
+.contact-nav::after {
     width: 90px !important;
     left: 0;
 }
@@ -1056,7 +1064,7 @@ header {
 
 }
 
-.container .card {
+.team .container .card {
 
     height: 600px;
     padding: 10px 10px;
@@ -1069,13 +1077,13 @@ header {
 
 }
 
-.container .card .content {
+.team .container .card .content {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.container .card .content .img_box {
+.team .container .card .content .img_box {
     width: 100%;
     height: 310px;
     position: relative;
@@ -1085,7 +1093,7 @@ header {
     cursor: pointer;
 }
 
-.container .card .content .img_box img {
+.team .container .card .content .img_box img {
     position: absolute;
     top: 0;
     left: 0;
@@ -1094,7 +1102,7 @@ header {
     object-fit: cover;
 }
 
-.container .card .content .img_box:hover {
+.team .container .card .content .img_box:hover {
     transition: all .3s;
     border-radius: 0px;
     transition-duration: 1s;
@@ -1970,6 +1978,178 @@ header {
 /*end responsive*/
 /*********************************************************************************************************************************************/
 /*#####################*/
+/* search */
+/*#####################*/
+:root{
+    --overlaycolor:rgb(0 0 0 / 40%);
+    --main-color:rgba(247, 108, 15, 0.8);;
+    --text-color:#e6d5b5;
+
+}
+
+
+/* strat landing  */
+ .landing{
+background-image:url(../images/landing.jpg);
+position: relative;
+width: 100%;
+background-size: cover;
+height:100vh;
+}
+ .landing::before{
+    content:"";
+    position: absolute;
+    width: 100%;
+    left:0;
+    top:0;
+    height: 100%;
+    background-color: var(--overlaycolor);
+}
+
+ .landing .text{
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+
+}
+
+ .landing .text h2{
+    color: var(--main-color);
+    font-size:90px;
+    font-style: normal;
+    
+}
+ .landing .text p{
+    color:var(--text-color);
+    padding:20px;
+    
+}
+
+
+
+/* end landing  */
+
+
+
+.search .card{
+   margin-top:50px;
+   background-color:#151515 !important;
+   box-shadow: 0 0 5px rgba(245, 245, 245, 0.253);
+}
+
+.search .card img{
+    transition:0.3s;
+}
+
+.search .card img:hover{
+    opacity:0.7;
+
+}
+ .search .card .text{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding:20px;
+    
+}
+
+ .search .card .text .date{
+    margin-top: 5px;
+
+}
+
+
+ .search .card .text h2{
+    color: var(--main-color);
+    font-size:25px;
+    padding-bottom: 10px;
+    
+}
+
+ .search .card .text p{
+
+    color:var(--text-color)
+
+}
+ .search .card .text .buy button{
+    padding: 15px;
+    background-color: var(--main-color);
+    border:none;
+    margin: 10px 0;
+    border-radius:5px;
+   
+    transition:0.3s;
+    font-weight:600;
+}
+
+.search .card .text .buy button:hover{
+    background-color: transparent;
+    color:var(--text-color)
+
+}
+
+
+
+
+.search .payment img{
+    width:100px
+}
+
+ 
+.search .payment img:last-of-type{
+    width: 90px;
+
+}
+
+.trending .trending-img img{
+    border-radius: 7px;
+}
+.trending .trending-flex{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.trending .trending-border{
+    background-color: #fff;
+    border: none;
+}
+.trending .trending-border2{
+    border: 2px solid whitesmoke;
+}
+.trending .trending-text a{
+    padding: 15px 0 0 0;
+    color: #30e3cba6;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .3s;
+}
+.trending .trending-text a:hover{
+    color: #33b8a6;
+}
+.trending .trending-text P{
+    font-size: 14px;
+    font-weight: 400;
+    color: #212529;
+    margin-bottom: 15px;
+}
+.trending .products-text{
+    margin-bottom: 25px;
+    position: relative;
+}
+.trending .products-text::after{
+    content: "";
+    width: 10%;
+    height: 4px;
+    background-color: #30e3ca;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+/* start card styling  */
+
+
+/* end card styling  */
+
+/*#####################*/
 /*footer*/
 /*#####################*/
 #footer {
@@ -2088,11 +2268,15 @@ header {
 }
 
 #footer .footer-top .footer-newsletter form input[type=email] {
-    border: 0;
+    border: none;
     padding: 4px;
-    width: calc(100% - 110px);
-}
+    width: 100% !important;
 
+}
+#footer .footer-top .footer-newsletter form input[type=email]:focus{
+    border: none !important;
+    direction: ltr;
+}
 #footer .footer-top .footer-newsletter form input[type=submit] {
     position: absolute;
     top: 0;
@@ -2132,6 +2316,9 @@ header {
 #footer .credits a {
     color: #D65A31;
 }
+
+
+
 
 /***************************************************************************************/
 /* Dark and light mood */

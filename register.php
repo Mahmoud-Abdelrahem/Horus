@@ -20,7 +20,7 @@ $phone = null;
 
 if (isset($_POST['signup'])) {
     $name = filterValidation($_POST['name']);
-    $phone =  $_POST['phone'];
+    $phone = $_POST['phone'];
     $email = filterValidation($_POST['email']);
     $pass = filterValidation($_POST['pass']);
     $confirmPass = filterValidation($_POST['confirm']);
@@ -32,7 +32,12 @@ if (isset($_POST['signup'])) {
     } else if (stringValidation($name, 4)) {
         $emailErorr[] = "please enter valid name more than 4 characters";
         $emailErorr2[] = 'ادخل اسم لا يقل عن اربع حروف';
-    } else if ($pass != $confirmPass) {
+    }
+    //  else if (validationPhone($phone)) {
+    //     $emailErorr[] = "Wrong Phone Number";
+    //     $emailErorr2[] = 'هذا الرقم غير صحيح';
+    // }
+     else if ($pass != $confirmPass) {
         $emailErorr[] = "Password and Confirm Password do not match";
         $emailErorr2[] = 'كلمة المرور وتاكيد كلمة المرور غير متشابهين';
     } else if (stringValidation($pass, 8)) {
@@ -49,7 +54,7 @@ if (isset($_POST['signup'])) {
     }
 
     if (empty($emailErorr) && empty($emailErorr2)) {
-        $insert = "INSERT INTO `users` VALUES (null,'$name',$phone,'$email','$pass','$confirmPass', 1)";
+        $insert = "INSERT INTO `users` VALUES (null,'$name',$phone,'$email','$pass','$confirmPass', 1 , 1 , 1)";
         $i = mysqli_query($conn, $insert);
         path("login.php");
     }
@@ -116,29 +121,33 @@ if (isset($_POST['signup'])) {
             <!-- start right side -->
             <div class="right-side animate__animated animate__bounceInRight" data-wow-delay=".5s">
                 <header>registration form</header>
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" class="needs-validation" novalidate>
 
                     <div class="field email">
                         <div class="input-area">
                             <input class="emailInput" type="text" placeholder="Enter your username" name="name" required value="<?= $name ?>">
                             <i class="icon fa-solid fa-user"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">Please, enter your name!</div>
                         </div>
 
                     </div>
 
                     <div class="field email">
                         <div class="input-area">
-                            <input class="emailInput" type="text" placeholder="Enter your mobile phone" name="phone" value="<?= $phone ?>" required>
+                            <input class="emailInput" type="number" placeholder="Enter your mobile phone" name="phone" value="<?= $phone ?>" required>
                             <i class="icon fa-solid fa-phone"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">Wrong Phone Number</div>
+
                         </div>
                     </div>
                     <div class="field email">
                         <div class="input-area">
-                            <input class="emailInput" type="text" placeholder="enter your email" name="email" value="<?= $email ?>" required>
+                            <input type="email" name="email" class="emailInput" id="yourEmail" placeholder="Enter your Email Address" value="<?= $email ?>" required>
                             <i class="icon fa-solid fa-envelope"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                         </div>
 
                     </div>
@@ -147,6 +156,7 @@ if (isset($_POST['signup'])) {
                             <input class="passInput" type="password" placeholder="enter your password" name="pass" required>
                             <i class="icon fa-solid fa-lock"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">Password is required</div>
                         </div>
                     </div>
                     <div class="field password">
@@ -154,6 +164,7 @@ if (isset($_POST['signup'])) {
                             <input class="passInput" type="password" placeholder="Confirm your password" name="confirm" required>
                             <i class="icon fa-solid fa-lock"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">Confirm Password is required</div>
                         </div>
 
                     </div>
@@ -167,7 +178,7 @@ if (isset($_POST['signup'])) {
                         </div>
                     <?php endif; ?>
 
-                    <button class="form-control btn w-100 mt-3 btn-sign" name="signup">sign up</button>
+                    <button class=" btn w-100 mt-3 btn-sign" name="signup">sign up</button>
 
                     <div class="signupLink">
                         Have an Account ? <a href="/Horus/login.php">Login</a>
@@ -183,7 +194,7 @@ if (isset($_POST['signup'])) {
 
 
 <!-- start main Arabic -->
-<main class="Arabic" id="Ar">
+<main class="Arabic " id="Ar">
 
     <section class="register">
         <div class="overlay-register"></div>
@@ -209,13 +220,15 @@ if (isset($_POST['signup'])) {
             <!-- البدء في الجانب الأيمن -->
             <div class="right-side animate__animated animate__bounceInRight" data-wow-delay=".5s">
                 <header>نموذج التسجيل</header>
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" class=" needs-validation" novalidate>
 
                     <div class="field email">
                         <div class="input-area">
                             <input class="emailInput" type="text" placeholder="أدخل اسم المستخدم الخاص بك" name="name" required value="<?= $name ?>">
                             <i class="icon fa-solid fa-user"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">يجب ادخال الاسم</div>
+
                         </div>
                     </div>
                     <div class="field email">
@@ -223,6 +236,7 @@ if (isset($_POST['signup'])) {
                             <input class="emailInput" type="text" placeholder="أدخل رقم هاتفك المحمول" name="phone" required value="<?= $phone ?>">
                             <i class="icon fa-solid fa-phone"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">خطأ في رقم الهاتف</div>
                         </div>
                     </div>
                     <div class="field email">
@@ -230,6 +244,8 @@ if (isset($_POST['signup'])) {
                             <input class="emailInput" type="text" placeholder="أدخل عنوان بريدك الإلكتروني" name="email" required value="<?= $email ?>">
                             <i class="icon fa-solid fa-envelope"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">هذا الايميل غير صحيح</div>
+
                         </div>
                     </div>
                     <div class="field password">
@@ -237,6 +253,7 @@ if (isset($_POST['signup'])) {
                             <input class="passInput" type="password" placeholder="أدخل كلمة المرور" name="pass" required>
                             <i class="icon fa-solid fa-lock"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">يجب ادخال كلمة سر مناسبة</div>
                         </div>
                     </div>
                     <div class="field password">
@@ -244,6 +261,8 @@ if (isset($_POST['signup'])) {
                             <input class="passInput" type="password" placeholder="تأكيد كلمة المرور" name="confirm" required>
                             <i class="icon fa-solid fa-lock"></i>
                             <i class="error error-icon fa-solid fa-circle-exclamation"></i>
+                            <div class="invalid-feedback">يجب ادخال تاكيد كلمة السر</div>
+
                         </div>
                     </div>
 
@@ -259,7 +278,7 @@ if (isset($_POST['signup'])) {
 
                     <button class="btn btn-sign w-100 mt-3" name="signup">تسجيل</button>
 
-                    <div class="signupLink mt-3" >
+                    <div class="signupLink mt-3">
                         لديك حساب بالفعل ؟ <a href="/Horus/login.php">تسجيل الدخول</a>
                     </div>
                 </form>
