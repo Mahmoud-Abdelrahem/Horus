@@ -1,0 +1,98 @@
+.seat{
+    background-image: url('../images/back.jpg');
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    padding: 15px;
+}
+
+.seat .container{
+    background-color: burlywood;
+    border-radius: 50px;
+    opacity: 0.7;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/*---------------------------------first row---------------------------*/
+
+.seat .container .first-row .selected{
+    color: green;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+.seat .container .first-row .booked-male{
+    color: blue;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+.seat .container .first-row .booked-female{
+    color: rgb(216, 110, 128);
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+.seat .container .first-row .available{
+    color: #cf400c;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+/*---------------------------------second row---------------------------*/
+
+.seat .container .second-row{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.seat .container .second-row .special-col{
+    display: block;
+}
+.seat .container .second-row .special-col .inner-col-seat{
+    display: flex;
+    justify-content: space-around;
+}
+.seat .container .second-row .special-col .inner-col-seat i{
+    color: #cf400c;
+}
+.seat .container .second-row .special-col .inner-col-num{
+    display: flex;
+    justify-content: space-around;
+}
+.seat .container .second-row .special-col .inner-col-num span{
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+}
+.seat i{
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/*---------------------------------------------third-row----------------------------------------*/
+
+.seat .container .third-row .col h3{
+    font-size: 25px;
+}
+.seat .container .third-row .col span{
+    font-size: 18px;
+}
+
+
+/*----------------------------------------------fourth row-----------------------------------------*/
+.seat .container .fourth-row .book-ticket{
+    outline: none;
+    border: 1px solid #cf400c;
+    padding: 10px 20px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    font-size: 19px;
+    font-weight: 400;
+}
+.seat .container .fourth-row .book-ticket:hover{
+    background-color: #cf400c ;
+    color: white;
+}

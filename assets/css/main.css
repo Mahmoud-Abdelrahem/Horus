@@ -10,6 +10,13 @@ img {
     border: 2px solid #D65A31;
 }
 
+#select {
+    text-transform: capitalize;
+}
+
+
+
+
 a:hover {
     text-decoration: none;
 }
@@ -1345,6 +1352,7 @@ header {
     padding: 2rem 0;
     text-align: center;
     overflow: hidden;
+    
 }
 
 .contact-info span {
@@ -1353,6 +1361,7 @@ header {
 
 .contact-info .box-info {
     margin: 0.8rem;
+    color: white !important;
     padding: 2rem 1rem;
     /* border-right: 1px solid #fff; */
     transition: all 0.4s ease;
@@ -1382,10 +1391,12 @@ header {
 .contact-info .info-title {
     font-weight: 500;
     font-size: 1.1rem;
+    color: white !important;
 }
 
 .contact-info .info-txt {
     padding-top: 0.4rem;
+    color: white !important;
 }
 
 /*start form*/
@@ -1525,6 +1536,53 @@ header {
 }
 
 /************************************** End section *************************************************** */
+/*#########################*/
+/* seat */
+/* ######################## */
+
+
+
+.seat{
+    background-image: url(../images/img.jpg);
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    height: 100vh;
+    background-repeat: no-repeat;
+    padding: 15px;
+}
+.seat a{
+    color: white !important;
+}
+.seat .row{
+    justify-content: center;
+}
+
+.seat-info{
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 30px 100px;
+    color: white;
+ 
+}
+
+.seat-text span{
+    font-size: 22px;
+}
+.seat-text-2 span{
+    font-size: 22px;
+    
+}
+.text-span-seat{
+    box-shadow:  0 0 8px whitesmoke;
+    border-radius: 5px 20px;
+}
+.seat-status{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+/*#######################################################################################################*/
+
 /*########################*/
 /* login */
 /*########################*/

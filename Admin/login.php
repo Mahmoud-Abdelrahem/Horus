@@ -1,9 +1,43 @@
 <?php
 include 'shared/head.php';
+include '../app/config.php';
+include '../app/functions.php';
 
+if (isset($_POST['login'])) {
+  $name = $_POST['username'];
+  $pass = $_POST['password'];
+  $select = "SELECT * FROM admins WHERE name = '$name' and password = '$pass'";
+  $s = mysqli_query($conn, $select);
+  $row = mysqli_fetch_assoc($s);
+  $numRows = mysqli_num_rows($s);
+
+  if ($numRows == 1) {
+    $_SESSION['admin-data'] = [
+      "userName" => $name,
+      "fullName" => $row['full_name'],
+      "id" => $row['id'],
+      'ruleID' => $row['ruleID'],
+    ];
+    $_SESSION['image'] = [
+      "image_name" => $row['image_name'],
+    ];
+  
+
+    pathAdmin("Admin/index.php");
+  } else {
+    $emailErorr[] = 'Wrong password or username';
+  }
+}
 
 
 ?>
+
+<!-- Start loading page -->
+<div class="loading-spiner">
+  <span class="loader"></span>
+</div>
+<!-- End loading page -->
+
 
 
 <main>
@@ -47,6 +81,16 @@ include 'shared/head.php';
                     <div class="invalid-feedback">Please enter your password!</div>
                   </div>
 
+                  <?php if (!empty($emailErorr)) : ?>
+                    <div class="alert alert-black text-danger mt-3">
+                      <ul>
+                        <?php foreach ($emailErorr as $error) : ?>
+                          <li><?= $error ?></li>
+                        <?php endforeach; ?>
+                      </ul>
+                    </div>
+                  <?php endif; ?>
+
                   <div class="col-12">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
@@ -54,16 +98,16 @@ include 'shared/head.php';
                     </div>
                   </div>
                   <div class="col-12">
-                    <button class="btn btn-primary w-100" type="submit">Login</button>
+                    <button class="btn btn-primary w-100" type="submit" name="login">Login</button>
                   </div>
-                 
+
                 </form>
 
               </div>
             </div>
 
             <div class="credits">
-             
+
               Designed by <a href="https://abdulrahman-nasser.github.io/Portfolio/">Tag | Team</a>
             </div>
 
@@ -76,7 +120,6 @@ include 'shared/head.php';
   </div>
 </main><!-- End #main -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <?php
 include 'shared/script.php';

@@ -124,7 +124,7 @@ if (isset($_POST['login'])) {
                                 </div>
                             <?php endif; ?>
                             <div class="forgetLink">
-                                <a href="#">forget password ?</a>
+                                <a href="mail_page-main/index.php">forget password ?</a>
                             </div>
                             <button class="form-control btn w-100 btn-sign" name="login">Login</button>
                         </form>
@@ -209,7 +209,7 @@ if (isset($_POST['login'])) {
                                 </div>
                             <?php endif; ?>
                             <div class="forgetLink">
-                                <a href="#">هل نسيت كلمة المرور ؟</a>
+                                <a href="mail_page-main/index.php">هل نسيت كلمة المرور ؟</a>
                             </div>
                             <button class="btn btn-sign w-100" name="login">تسجيل الدخول</button>
                         </form>

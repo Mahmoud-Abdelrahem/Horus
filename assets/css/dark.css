@@ -9,6 +9,13 @@ img {
 .btn-sign {
     border: 2px solid #D65A31;
 }
+select{
+    text-transform: capitalize;
+}
+
+#select {
+    text-transform: capitalize;
+}
 
 a:hover {
     text-decoration: none;
@@ -228,6 +235,7 @@ a {
 /*############################*/
 header {
     overflow: hidden;
+    box-shadow: 0 0 10px #e6d5b5;
 
 }
 
@@ -1346,6 +1354,7 @@ header {
 .contact-info .box-info {
     margin: 0.8rem;
     padding: 2rem 1rem;
+    color: white !important;
     /* border-right: 1px solid #fff; */
     transition: all 0.4s ease;
     cursor: pointer;
@@ -1374,10 +1383,12 @@ header {
 .contact-info .info-title {
     font-weight: 500;
     font-size: 1.1rem;
+    color: white !important;
 }
 
 .contact-info .info-txt {
     padding-top: 0.4rem;
+    
 }
 
 /*start form*/
@@ -1517,6 +1528,70 @@ header {
 }
 
 /************************************** End section *************************************************** */
+
+/*####################*/
+/* seat *
+/* ###################/*/
+
+.seat{
+    background-image: url('../images/img.jpg');
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    height: auto;
+    background-repeat: no-repeat;
+    padding: 15px;
+}
+
+.seat-info{
+    background-color: rgba(0, 0, 0, 0.89) !important;
+    border-radius: 15px;
+    width: 75%;
+    text-align: center;
+    margin: auto;
+    box-shadow:  0 0 5px #e45927;
+}
+
+.booked_parent{
+    color: #7e808d !important;
+}
+
+
+.booked_parent img, svg{
+    /* background-color: whitesmoke; */
+    width: 80%;
+    fill: #7e808d;
+    padding: 10px 10px;
+    margin: 5px 0;
+    transition: all .3s;
+    border-radius: 5px 20px;
+}
+.booked_parent img, svg:hover{
+    box-shadow: 0 0 15px #e45927;
+}
+
+.booked{
+    width: 80%;
+    fill: #ff2020 !important;
+}
+
+.main_text{
+    font-weight: bold;
+    font-size: 20px;
+}
+.text1{
+    color:#7e808d !important;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
+
+/**********************************************************************************************/
+
+
+
 /*########################*/
 /* login */
 /*########################*/
@@ -1980,6 +2055,21 @@ header {
 }
 
 
+.book_btn{
+    background-color: transparent;
+    color: wheat;
+    border: 1px solid #e45927;
+    padding: 8px 10px;
+    border-radius: 5px 26px;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .3s;
+    font-weight: bold;
+}
+.book_btn:hover{
+    background-color: #e45927;
+    color: wheat;
+    letter-spacing: 1.5px;
+}
+
 /* strat landing  */
 
 .landing {
@@ -2035,14 +2125,17 @@ header {
     margin-top: 50px;
     background-color: #151515 !important;
     box-shadow: 0 0 5px rgba(245, 245, 245, 0.253);
+    overflow: hidden;
 }
 
 .search .card img {
     transition: 0.3s;
+   
 }
 
 .search .card img:hover {
     opacity: 0.7;
+    transform: scale(1.07);
 
 }
 
@@ -2093,12 +2186,12 @@ header {
 
 
 .search .payment img {
-    width: 100px
+    width: 60px
 }
 
 
 .search .payment img:last-of-type {
-    width: 90px;
+    width: 50px;
 
 }
 
@@ -2155,14 +2248,37 @@ header {
 
 /* start card styling  */
 
-
-/* end card styling  */
-
-
 /* end card styling  */
 
 
 
+/* end card styling  */
+/* profile*/
+.pagetitle{
+    color: #D65A31;
+}
+.profile .card{
+    background-color: black;
+    box-shadow: 0 0 5px #e45927;
+    border-radius: 10px 50px;
+}
+.profile .card img{
+    border-radius: 10px 50px;
+}
+.profile .card .card-title{
+    color: #e45927;
+}
+.profile .card .label{
+    margin: 10px 0;
+    color: #e45927;
+}
+.profile .card .text{
+    color: white;
+}
+.profile .card .btn{
+    border: 2px solid #e45927;
+    color: white;
+}
 
 /* end card styling  */
 /*********************************************************************************************************************************************/

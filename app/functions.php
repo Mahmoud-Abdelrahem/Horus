@@ -1,5 +1,6 @@
 <?php
 
+
 function testMessage($condition, $message)
 {
     if ($condition) {
@@ -14,6 +15,12 @@ function path($go)
 {
     echo "<script> window.location.replace('/Horus/$go')</script>";
 }
+
+function pathAdmin($go)
+{
+    echo "<script> window.location.replace('/Horus/$go')</script>";
+}
+
 
 
 function auth($rule2 = null, $rule3 = null)
@@ -32,17 +39,27 @@ function auth($rule2 = null, $rule3 = null)
         path('login.php');
     }
 }
-function authAdmin($rule2 = null, $rule3 = null)
+function auth_admin($rule2 = null, $rule3 = null)
 {
-    if ($_SESSION['admins']) {
-        if (isset($_SESSION['admins'])) {
-            if ($_SESSION['admins']['ruleID'] == 1 || $_SESSION['admins']['ruleID'] == $rule2) {
+    if ($_SESSION['admin-data']) {
+        if (isset($_SESSION['admin-data'])) {
+            if ($_SESSION['admin-data']['ruleID'] == 1 || $_SESSION['admin-data']['ruleID'] == $rule2) {
+            }else {
+                path("Admin/error404.php");
             }
         } else {
-            path('Admin/login.php');
+            path("Admin/login.php");
         }
     } else {
-        path('Admin/login.php');
+        path("Admin/login.php");
+    }
+}
+
+function auth_code(){
+    if(isset($_SESSION['confirmed'])){
+        
+    }else{
+        path("mail_page-main/Vertify_Code.php");
     }
 }
 

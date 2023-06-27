@@ -3,10 +3,12 @@ include "app/config.php";
 include "app/functions.php";
 include 'shared/head.php';
 
-// select usesrs for valditation
-$select = "SELECT * FROM users ";
-$s = mysqli_query($conn, $select);
-$row = mysqli_fetch_assoc($s);
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'mail_page-main/phpmailer/src/Exception.php';
+require 'mail_page-main/phpmailer/src/PHPMailer.php';
+require 'mail_page-main/phpmailer/src/SMTP.php';
 
 // make variables empty
 $emailError = [];
@@ -19,11 +21,17 @@ $phone = null;
 
 
 if (isset($_POST['signup'])) {
+
     $name = filterValidation($_POST['name']);
     $phone = $_POST['phone'];
     $email = filterValidation($_POST['email']);
     $pass = filterValidation($_POST['pass']);
     $confirmPass = filterValidation($_POST['confirm']);
+
+
+    $select = "SELECT * FROM users ";
+    $s = mysqli_query($conn, $select);
+    $row = mysqli_fetch_assoc($s);
 
 
     if ($email == "" || $pass == "" || $phone == '' || $name == '' || $confirmPass == "") {
@@ -37,26 +45,71 @@ if (isset($_POST['signup'])) {
     //     $emailErorr[] = "Wrong Phone Number";
     //     $emailErorr2[] = 'هذا الرقم غير صحيح';
     // }
-     else if ($pass != $confirmPass) {
+    else if ($pass != $confirmPass) {
         $emailErorr[] = "Password and Confirm Password do not match";
         $emailErorr2[] = 'كلمة المرور وتاكيد كلمة المرور غير متشابهين';
     } else if (stringValidation($pass, 8)) {
         $emailErorr[] = "Password must be more than 8 characters";
         $emailErorr2[] = 'كلمة المرور يجب ان تكون اكثر من 8 احرف';
     }
-    if ($row['email'] == $email) {
-        foreach ($s as $data) {
-            if ($data['email'] == $email) {
-                $emailErorr[] = "Email is not available";
-                $emailErorr2[] = "هذا الايميل موجود سابقاً";
-            }
+    foreach ($s as $data) {
+        if ($data['email'] == $email) {
+            $emailErorr[] = "Email is not available";
+            $emailErorr2[] = "هذا الايميل موجود سابقاً";
         }
     }
 
     if (empty($emailErorr) && empty($emailErorr2)) {
-        $insert = "INSERT INTO `users` VALUES (null,'$name',$phone,'$email','$pass','$confirmPass', 1 , 1 , 1)";
-        $i = mysqli_query($conn, $insert);
-        path("login.php");
+        $random_code = time();
+        $_SESSION['registerd'] = [
+            "target_email" => $email,
+            "code" => $random_code,
+            "name" => $name,
+            "phone" => $phone,
+            "pass" => $pass,
+            "confirm_pass"=> $confirmPass
+        ];
+
+        try {
+            $mail = new PHPMailer(true);
+
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'horustransport500@gmail.com';
+            $mail->Password   = 'qwipukhfhzytwkap';
+
+            // Disable SSL certificate verification
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                    'allow_self_signed' => true
+                )
+            );
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+
+            $mail->setFrom('horustransport500@gmail.com');
+            //horustransport500@gmail.com --> Hours2018 
+            $mail->addAddress($_POST["email"]);
+            $mail->isHTML(true);
+            $mail->Subject = 'Confirmation Code';
+            $mail->Body    = "<h1> This is Your Confirmation Code For Your Horus Email ، Do not Share This With Any One: <br><br> </h1> <h2>$random_code</h2>" ;
+
+            $mail->send();
+
+            echo "
+            <script>
+            document.location.href='mail_page-main/activation.php';
+            </script>
+        ";
+        } catch (Exception $e) {
+            echo "Mailer Error: " . $e->getMessage();
+        }
+
+
+
     }
 }
 

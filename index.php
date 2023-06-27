@@ -86,53 +86,60 @@ if (isset($_POST['signout'])) {
         <main class="English " id="En">
 
             <!-- start header -->
-            <header>
-                <div class="Navbar p-3">
-                    <nav class="navbar navbar-expand-lg ">
-                        <div class="container-fluid">
-                            <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">HORUS</a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse " id="navbarNav">
-                                <ul class="navbar-nav m-auto">
-                                    <li class="nav-item">
-                                        <a class="nav-link  animate__animated animate__bounceInUp active" data-wow-delay="1s" aria-current="page" href="#">Home</a>
-                                    </li>
-                                    <li class="nav-item nav-after">
-                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#about">About us</a>
-                                    </li>
-                                    <li class="nav-item nav-after">
-                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="#team">Team</a>
-                                    </li>
-                                    <li class="nav-item nav-after">
-                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#services">Services</a>
-                                    </li>
-                                    <li class="nav-item nav-after">
-                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.php">Booking</a>
-                                    </li>
-                                    <li class="nav-item nav-after">
-                                        <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.php">Contact</a>
-                                    </li>
-                                </ul>
-                                <?php if (isset($_SESSION['users'])) : ?>
-                                    <form class="d-flex m-auto header-login" method="post" role="search">
-                                        <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">Logout </button>
-                                    </form>
-                                    <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+    <header>
+      <div class="Navbar p-3">
+        <nav class="navbar navbar-expand-lg ">
+          <div class="container-fluid">
+            <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">HORUS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+              <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                  <a class="nav-link  animate__animated animate__bounceInUp active" data-wow-delay="1s" aria-current="page" href="/Horus/index.php">Home</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/index.php#about">About us</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="/Horus/index.php#team">Team</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/index.php#services">Services</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="/Horus/booking.php">Booking</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/contact.php">Contact</a>
+                </li>
+              </ul>
+              <?php if (isset($_SESSION['users'])) : ?>
+                <form class="d-flex m-auto header-login" method="post" role="search">
+                  <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">Logout </button>
+                </form>
+                <a href="/Horus/Admin/login.php" class=" nav-link nav-profile d-flex align-items-center pe-2 animate__animated animate__lightSpeedInRight" data-wow-delay="1s">
+                  <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt="">
+                  <span class="d-none d-md-block ps-2" style="color: #e45927;">Staf Only</span>
 
-                                <?php else : ?>
-                                    <form class="d-flex m-auto header-login" role="search">
-                                        <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> Login</a>
-                                    </form>
-                                    <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </header>
-            <!-- end header -->
+                </a>
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="/Horus/profile.php">
+                  <img src="assets/images/Abod.jpg" style="width: 30px;" alt="">
+                  <span class="d-none d-md-block ps-2" style="color: #e45927;"><?= $row['name'] ?></span>
+                </a><!-- End Profile Iamge Icon -->
+              <?php else : ?>
+                <form class="d-flex m-auto header-login" role="search">
+                  <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> Login</a>
+                </form>
+                <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+              <?php endif; ?>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header -->
 
 
             <!-- start section home -->
@@ -148,7 +155,7 @@ if (isset($_POST['signout'])) {
                             <h2 class="animate__animated animate__zoomIn " data-wow-delay=".5s">HORUS</h2>
                             <p class="animate__animated animate__rotateInUpRight " data-wow-delay=".5s">For Safety Travel
                             </p>
-                            <a href="#about"><button class="Btn animate__animated animate__rotateInUpRight " data-wow-delay="1s">Get
+                            <a href="#about"><button class="Btn animate__animated animate__rotateInUpRight text-light " data-wow-delay="1s">Get
                                     Started</button></a>
                         </div>
 
@@ -223,7 +230,7 @@ if (isset($_POST['signout'])) {
                                     <div class="cool-bag-overlay">
                                         <div class="overlay-btn">
                                             <span>
-                                                <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                                <a href="/booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                             </span>
                                             <span>
                                                 <a href="./assets/images/22.jpg" data-lightbox="bus">
@@ -247,7 +254,7 @@ if (isset($_POST['signout'])) {
                                     <div class="cool-bag-overlay">
                                         <div class="overlay-btn">
                                             <span>
-                                                <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                                <a href="/booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                             </span>
                                             <span>
                                                 <a href="./assets/images/girl.jpg" data-lightbox="bus">
@@ -272,7 +279,7 @@ if (isset($_POST['signout'])) {
                                     <div class="cool-bag-overlay">
                                         <div class="overlay-btn">
                                             <span>
-                                                <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                                <a href="/booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                             </span>
                                             <span>
                                                 <a href="./assets/images/booking.jpg" data-lightbox="bus">
@@ -551,58 +558,60 @@ if (isset($_POST['signout'])) {
 
         <!-- start main Arabic -->
         <main class="Arabic" id="Ar">
-            <!-- Start Header -->
-            <header>
-                <div class="Navbar p-3">
-                    <nav class="navbar navbar-expand-lg ">
-                        <div class="container-fluid">
-                            <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">HORUS
-                            </a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse " id="navbarNav">
-                                <ul class="navbar-nav m-auto">
-                                    <li class="nav-item active_ar active_ar6">
-                                        <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.php">الاتصال بنا</a>
-                                    </li>
-                                    <li class="nav-item active_ar active_ar5 ">
-                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.php">الحجز</a>
-                                    </li>
-                                    <li class="nav-item active_ar active_ar4">
-                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#services_Ar">الخدمات</a>
-                                    </li>
-                                    <li class="nav-item active_ar active_ar3">
-                                        <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="#team_Ar">الفريق</a>
-                                    </li>
-                                    <li class="nav-item active_ar active_ar2 ">
-                                        <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#aboutus">من نحن</a>
-                                    </li>
-                                    <li class="nav-item active_ar active_ar1">
-                                        <a class="nav-link  animate__animated animate__bounceInUp " data-wow-delay="1s" aria-current="page" href="index.php">الصفحة الرئيسية
-                                        </a>
-                                    </li>
-                                </ul>
+    <header style="direction:rtl;" >
+      <div class="Navbar p-3">
+        <nav class="navbar navbar-expand-lg ">
+          <div class="container-fluid">
+            <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">حورس</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+              <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                  <a class="nav-link  animate__animated animate__bounceInUp active" data-wow-delay="1s" aria-current="page" href="/Horus/index.php">الرئيسية</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a href ="#aboutus" class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/index.php#about">من نحن</a>
+                </li>
+                <li  class="nav-item nav-after">
+                  <a href="#team_Ar" class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="/Horus/index.php#team">فريق العمل</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a href="#services_Ar" class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/index.php#services">الخدمات</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="/Horus/booking.php">الحجز</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/contact.php">تواصل معنا</a>
+                </li>
+              </ul>
+              <?php if (isset($_SESSION['users'])) : ?>
+                <form class="d-flex m-auto header-login" method="post" role="search">
+                  <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الخروج </button>
+                </form>
+                <a href="/Horus/Admin/login.php" class=" nav-link nav-profile d-flex align-items-center pe-2 animate__animated animate__lightSpeedInRight" data-wow-delay="1s">
+                  <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt="">
+                  <span class="d-none d-md-block ps-2" style="color: #e45927;">للموظفين فقط</span>
 
-                                <?php if (isset($_SESSION['users'])) : ?>
-                                    <form class="d-flex m-auto header-login" method="post" role="search">
-                                        <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الخروج</button>
-                                    </form>
-                                    <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
-
-                                <?php else : ?>
-                                    <form class="d-flex m-auto header-login" role="search">
-                                        <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الدخول</a>
-                                    </form>
-                                    <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
-
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </header>
-            <!-- End Header -->
+                </a>
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="/Horus/profile.php">
+                  <img src="assets/images/Abod.jpg" style="width: 30px;" alt="">
+                  <span class="d-none d-md-block ps-2" style="color: #e45927;"><?= $row['name'] ?></span>
+                </a><!-- نهاية صورة الملف الشخصي -->
+              <?php else : ?>
+                <form class="d-flex m-auto header-login" role="search">
+                  <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> تسجيل الدخول</a>
+                </form>
+                <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+              <?php endif; ?>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- نهاية الهيدر -->
 
             <!-- start home -->
             <section class="home p-70">
@@ -617,7 +626,7 @@ if (isset($_POST['signout'])) {
                             <h2 class="animate__animated animate__zoomIn " data-wow-delay=".5s">حورس</h2>
                             <p class="animate__animated animate__rotateInUpRight " data-wow-delay=".5s">للسفر الآمن</p>
                             <a href="#aboutus">
-                                <button class="Btn animate__animated animate__rotateInUpRight " data-wow-delay="1s">
+                                <button class="Btn animate__animated animate__rotateInUpRight text-light " data-wow-delay="1s">
                                     ابدأ
                                 </button>
                             </a>
@@ -683,7 +692,7 @@ if (isset($_POST['signout'])) {
                                     <div class="cool-bag-overlay">
                                         <div class="overlay-btn">
                                             <span>
-                                                <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                                <a href="/Horus/booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                             </span>
                                             <span>
                                                 <a href="./assets/images/22.jpg" data-lightbox="bus">
@@ -707,7 +716,7 @@ if (isset($_POST['signout'])) {
                                     <div class="cool-bag-overlay">
                                         <div class="overlay-btn">
                                             <span>
-                                                <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                                <a href="/Horus/booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                             </span>
                                             <span>
                                                 <a href="./assets/images/girl.jpg" data-lightbox="bus">
@@ -731,7 +740,7 @@ if (isset($_POST['signout'])) {
                                     <div class="cool-bag-overlay">
                                         <div class="overlay-btn">
                                             <span>
-                                                <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                                <a href="/Horus/booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                             </span>
                                             <span>
                                                 <a href="./assets/images/booking.jpg" data-lightbox="bus">
@@ -915,7 +924,7 @@ if (isset($_POST['signout'])) {
 
                                     <div class="info_box">
                                         <h2>مصطفى محمود بدوي</h2>
-                                        <h3>مطور خلفية المستخدم</h3>
+                                        <h3>مطور واجهة المستخدم</h3>
                                     </div>
 
 
@@ -1038,7 +1047,7 @@ if (isset($_POST['signout'])) {
             </div>
             <div class="col-lg-2">
                 <span class="trans">
-                    <a onclick="State()"> <i class="fa-solid fa-globe"></i></a>
+                    <a onclick="State()"> <i class="bi bi-translate"></i></a>
                 </span>
             </div>
         </div>
@@ -1188,7 +1197,7 @@ if (isset($_POST['signout'])) {
                                 <div class="cool-bag-overlay">
                                     <div class="overlay-btn">
                                         <span>
-                                            <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                            <a href="booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                         </span>
                                         <span>
                                             <a href="./assets/images/22.jpg" data-lightbox="bus">
@@ -1212,7 +1221,7 @@ if (isset($_POST['signout'])) {
                                 <div class="cool-bag-overlay">
                                     <div class="overlay-btn">
                                         <span>
-                                            <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                            <a href="booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                         </span>
                                         <span>
                                             <a href="./assets/images/girl.jpg" data-lightbox="bus">
@@ -1237,7 +1246,7 @@ if (isset($_POST['signout'])) {
                                 <div class="cool-bag-overlay">
                                     <div class="overlay-btn">
                                         <span>
-                                            <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                            <a href="/booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                         </span>
                                         <span>
                                             <a href="./assets/images/booking.jpg" data-lightbox="bus">
@@ -1557,8 +1566,8 @@ if (isset($_POST['signout'])) {
                                 </form>
                             <?php else : ?>
 
-                                
-                                
+
+
                                 <form class="d-flex m-auto header-login" role="search">
                                     <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الدخول</a>
                                 </form>
@@ -1652,7 +1661,7 @@ if (isset($_POST['signout'])) {
                                 <div class="cool-bag-overlay">
                                     <div class="overlay-btn">
                                         <span>
-                                            <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                            <a href="booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                         </span>
                                         <span>
                                             <a href="./assets/images/22.jpg" data-lightbox="bus">
@@ -1676,7 +1685,7 @@ if (isset($_POST['signout'])) {
                                 <div class="cool-bag-overlay">
                                     <div class="overlay-btn">
                                         <span>
-                                            <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                            <a href="booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                         </span>
                                         <span>
                                             <a href="./assets/images/girl.jpg" data-lightbox="bus">
@@ -1700,7 +1709,7 @@ if (isset($_POST['signout'])) {
                                 <div class="cool-bag-overlay">
                                     <div class="overlay-btn">
                                         <span>
-                                            <a href="booking.html"><i class="fa-solid fa-credit-card"></i></a>
+                                            <a href="booking.php"><i class="fa-solid fa-credit-card"></i></a>
                                         </span>
                                         <span>
                                             <a href="./assets/images/booking.jpg" data-lightbox="bus">

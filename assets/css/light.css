@@ -10,6 +10,13 @@ img {
     border: 2px solid #D65A31;
 }
 
+#select {
+    text-transform: capitalize;
+}
+
+input {
+    color:black !important ;
+}
 a:hover {
     text-decoration: none;
 }
@@ -228,6 +235,7 @@ a {
 /*############################*/
 header {
     overflow: hidden;
+    box-shadow: 0 0 10px ;
 
 }
 
@@ -425,7 +433,7 @@ header {
 }
 
 .Btn {
-    color: black !important;
+    color: black;
     padding: 8px 30px !important;
     background-color: transparent;
     border: 2px solid #D65A31;
@@ -1057,7 +1065,7 @@ header {
     height: 600px;
     padding: 10px 10px;
     /* background-color: #393e4634; */
-    background: rgba(0, 0, 0, 0.9);
+    background: #f1f1f1;
     border-radius: 20px;
     margin-bottom: 7%;
     box-shadow: 8px 8px 15px #d6531d;
@@ -1513,6 +1521,64 @@ header {
 }
 
 /************************************** End section *************************************************** */
+/* ################## */
+/* seat */
+/* ################## */
+.seat{
+    background-image: url('../images/img.jpg');
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    height: auto;
+    background-repeat: no-repeat;
+    padding: 10px;
+}
+
+.Arabic .booked_parent{
+    color: black;
+}
+
+.seat-info{
+    background-color: rgba(245, 245, 245, 0.863) !important;
+    border-radius: 15px;
+    width: 70%;
+    text-align: center;
+    margin: auto;
+    box-shadow:  0 0 5px black;
+}
+
+
+.booked_parent img, svg{
+    width: 80%;
+    fill: #080808;
+    padding: 10px 10px;
+    margin: 5px 0;
+    transition: all .3s;
+    border-radius: 5px 20px;
+}
+.booked_parent img, svg:hover{
+    box-shadow: 0 0 15px #070707;
+}
+
+.booked{
+    width: 80%;
+    fill: #ff2020;
+}
+.light span{
+    color: black !important;
+}
+.text1{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.main_text{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
 /*########################*/
 /* login */
 /*########################*/
@@ -1964,6 +2030,37 @@ header {
 }
 
 /*end responsive*/
+
+
+
+.pagetitle{
+    color: #D65A31;
+}
+.profile .card{
+    background-color: #f1f1f1;
+    box-shadow: 0 0 5px #e45927;
+    border-radius: 10px 50px;
+}
+.profile .card img{
+    border-radius: 10px 50px;
+}
+.profile .card .card-title{
+    color: #e45927;
+}
+.profile .card .label{
+    margin: 10px 0;
+    color: #e45927;
+}
+.profile .card .text{
+    color: black;
+}
+.profile .card .btn{
+    border: 2px solid #e45927;
+    color: black;
+}
+.profile .card input{
+    color: black;
+}
 /*********************************************************************************************************************************************/
 /*#####################*/
 /*footer*/
@@ -2143,6 +2240,7 @@ body {
 
 .Navbar {
     background: white;
+    box-shadow: 0 0 10px black;
 }
 
 .Navbar .navbar-nav a {
@@ -2177,6 +2275,10 @@ body {
 .container .card {
     background-color: #393e461f;
 }
+
+
+
+
 
 /***************************************************************************************/
 /* Arabic Css */
@@ -2400,16 +2502,19 @@ body {
 
 .search .card {
     margin-top: 50px;
-    background-color: #151515 !important;
-    box-shadow: 0 0 5px rgba(245, 245, 245, 0.253);
+    background-color: #f1f1f1 !important;
+    box-shadow: 0 0 5px rgb(7, 7, 7);
+    overflow: hidden;
 }
 
 .search .card img {
     transition: 0.3s;
+    overflow: hidden;
+
 }
 
 .search .card img:hover {
-    opacity: 0.7;
+    transform: scale(1.07);
 
 }
 
@@ -2428,15 +2533,15 @@ body {
 
 
 .search .card .text h2 {
-    color: var(--main-color);
+    color: black;
     font-size: 25px;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 
 }
 
 .search .card .text p {
 
-    color: var(--text-color)
+    color: black;
 }
 
 .search .card .text .buy button {
@@ -2445,7 +2550,6 @@ body {
     border: none;
     margin: 10px 0;
     border-radius: 5px;
-
     transition: 0.3s;
     font-weight: 600;
 }
@@ -2455,16 +2559,20 @@ body {
     color: var(--text-color)
 }
 
-
+.search p{
+    margin: 4px 0;
+    line-height: 1.5;
+}
 
 
 .search .payment img {
-    width: 100px
+    width: 60px
 }
 
 
 .search .payment img:last-of-type {
-    width: 90px;
+    width: 50px;
+    margin-bottom: 5px;
 
 }
 
@@ -2517,6 +2625,22 @@ body {
     position: absolute;
     bottom: -10px;
     left: 0;
+}
+
+.book_btn{
+    background-color: transparent;
+    color: black;
+    border: 1px solid #282c3f;
+    padding: 8px 10px;
+    border-radius: 5px 26px;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .3s;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.book_btn:hover{
+    background-color: #282c3f;
+    color: wheat;
+    letter-spacing: 1.5px;
 }
 
 /* start card styling  */

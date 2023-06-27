@@ -26,11 +26,8 @@ if (isset($_SESSION['users'])) {
     <!-- cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- css Files -->
-
-
-
     <link rel="stylesheet" href="/Horus/assets/vendor/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="/Horus/assets/vendor/swiper/swiper-bundle.min.css">
+    <link href="/Horus/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="/Horus/assets/css/all.min.css">
     <link rel="stylesheet" href="/Horus/assets/vendor/wow/animate.min.css">
     <link rel="stylesheet" href="/Horus/assets/vendor/light box/lightbox.min.css">
@@ -46,6 +43,8 @@ if (isset($_SESSION['users'])) {
         <link rel="stylesheet" href="/Horus/assets/css/main.css">
     <?php endif; ?>
 
+
+   
 </head>
 
 <body class="dark">
