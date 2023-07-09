@@ -85,7 +85,7 @@ if (isset($_POST['signout'])) {
     <?php if ($row['langID'] == 2) : ?>
         <main class="English " id="En">
 
-            <!-- start header -->
+    <!-- start header -->
     <header>
       <div class="Navbar p-3">
         <nav class="navbar navbar-expand-lg ">
@@ -125,7 +125,7 @@ if (isset($_POST['signout'])) {
 
                 </a>
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="/Horus/profile.php">
-                  <img src="assets/images/Abod.jpg" style="width: 30px;" alt="">
+                  <img src="assets/images/person.png" style="width: 30px;" alt="">
                   <span class="d-none d-md-block ps-2" style="color: #e45927;"><?= $row['name'] ?></span>
                 </a><!-- End Profile Iamge Icon -->
               <?php else : ?>
@@ -597,7 +597,7 @@ if (isset($_POST['signout'])) {
 
                 </a>
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="/Horus/profile.php">
-                  <img src="assets/images/Abod.jpg" style="width: 30px;" alt="">
+                  <img src="assets/images/person.png" style="width: 30px;" alt="">
                   <span class="d-none d-md-block ps-2" style="color: #e45927;"><?= $row['name'] ?></span>
                 </a><!-- نهاية صورة الملف الشخصي -->
               <?php else : ?>

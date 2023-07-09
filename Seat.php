@@ -4,11 +4,10 @@ include 'app/config.php';
 include 'app/functions.php';
 include 'shared/head.php';
 
-
 if (isset($_SESSION['users'])) {
     $id = $_SESSION['users']['id'];
     $select = "SELECT * FROM users where id = $id";
-    $s =  mysqli_query($conn, $select);
+    $s = mysqli_query($conn, $select);
     $row = mysqli_fetch_assoc($s);
 
     if (isset($_POST['lang'])) {
@@ -27,7 +26,7 @@ if (isset($_SESSION['users'])) {
         if ($row['modeID'] == 1) {
             $update = "UPDATE users set `modeID` = 2  where id = $id";
             mysqli_query($conn, $update);
-            path('#');
+            path('Seat.php');
         } else {
             $update = "UPDATE users set `modeID` = 1 where id = $id ";
             mysqli_query($conn, $update);
@@ -35,7 +34,6 @@ if (isset($_SESSION['users'])) {
         }
     }
 }
-
 
 $error_booking = [];
 $error_booking_ar = [];
@@ -57,8 +55,7 @@ $hour1 = $time_part1[0];
 $min1 = $time_part1[1];
 $sec = $time_part1[2];
 
-
-// delete booking by time after 1 minute 
+// delete booking by time after 1 minute
 if ($current_hour == $hour1 && $current_minute == $min1) {
     $delete_booking = "DELETE FROM seats WHERE start_time  = '$current_hour:$current_minute:00' AND bus_check = $id_bus ";
     $d = mysqli_query($conn, $delete_booking);
@@ -67,8 +64,6 @@ if ($current_hour == $hour1 && $current_minute == $min1) {
     $error_booking_ar[] = "يوجد تحديث في النظام انتظر دقيقة واحدة";
 
 }
-
-
 
 if (isset($_GET['confirm'])) {
     $id_seat = $_GET['confirm'];
@@ -94,19 +89,13 @@ if (isset($_GET['confirm'])) {
             'bus_num' => $bus_number,
             'seat_booked' => $id_seat,
             'start_time' => $start_time,
-            'salary' => $salary 
+            'salary' => $salary,
         ];
 
         path("payment/pay.php");
     }
 
-
-
-
 }
-
-
-
 
 if (isset($_POST['signout'])) {
     session_unset();
@@ -115,10 +104,6 @@ if (isset($_POST['signout'])) {
 }
 
 auth(2);
-
-
-
-
 
 ?>
 
@@ -131,7 +116,7 @@ auth(2);
 
 
 <!-- mode and translate  with login users-->
-<?php if (isset($_SESSION['users'])) : ?>
+<?php if (isset($_SESSION['users'])): ?>
     <div class="slide-text">
         <div class="row">
             <div class="col-lg-2 ">
@@ -154,60 +139,68 @@ auth(2);
         </div>
 
     </div>
-<?php endif; ?>
+<?php endif;?>
 <!-- End mode and translate with login users -->
 
 
 
-<?php if ($row['langID'] == 2) : ?>
+<?php if ($row['langID'] == 2): ?>
     <main class="English" id="En">
         <!-- start header -->
-        <header>
-            <div class="Navbar p-3">
-                <nav class="navbar navbar-expand-lg ">
-                    <div class="container-fluid">
-                        <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">HORUS</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse " id="navbarNav">
-                            <ul class="navbar-nav m-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link  animate__animated animate__bounceInUp active" data-wow-delay="1s" aria-current="page" href="index.php">Home</a>
-                                </li>
-                                <li class="nav-item nav-after">
-                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#about">About us</a>
-                                </li>
-                                <li class="nav-item nav-after">
-                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="#team">Team</a>
-                                </li>
-                                <li class="nav-item nav-after">
-                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#services">Services</a>
-                                </li>
-                                <li class="nav-item nav-after">
-                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.php">Booking</a>
-                                </li>
-                                <li class="nav-item nav-after">
-                                    <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.php">Contact</a>
-                                </li>
-                            </ul>
-                            <?php if (isset($_SESSION['users'])) : ?>
-                                <form class="d-flex m-auto header-login" method="post" role="search">
-                                    <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">Logout </button>
-                                </form>
-                            <?php else : ?>
-                                <form class="d-flex m-auto header-login" role="search">
-                                    <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> Login</a>
-                                </form>
-                                <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+    <header>
+      <div class="Navbar p-3">
+        <nav class="navbar navbar-expand-lg ">
+          <div class="container-fluid">
+            <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">HORUS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+              <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                  <a class="nav-link  animate__animated animate__bounceInUp active" data-wow-delay="1s" aria-current="page" href="/Horus/index.php">Home</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/index.php#about">About us</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="/Horus/index.php#team">Team</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/index.php#services">Services</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="/Horus/booking.php">Booking</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/contact.php">Contact</a>
+                </li>
+              </ul>
+              <?php if (isset($_SESSION['users'])): ?>
+                <form class="d-flex m-auto header-login" method="post" role="search">
+                  <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">Logout </button>
+                </form>
+                <a href="/Horus/Admin/login.php" class=" nav-link nav-profile d-flex align-items-center pe-2 animate__animated animate__lightSpeedInRight" data-wow-delay="1s">
+                  <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt="">
+                  <span class="d-none d-md-block ps-2" style="color: #e45927;">Staf Only</span>
 
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </nav>
+                </a>
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="/Horus/profile.php">
+                  <img src="assets/images/person.png" style="width: 30px;" alt="">
+                  <span class="d-none d-md-block ps-2" style="color: #e45927;"><?=$row['name']?></span>
+                </a><!-- End Profile Iamge Icon -->
+              <?php else: ?>
+                <form class="d-flex m-auto header-login" role="search">
+                  <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> Login</a>
+                </form>
+                <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+              <?php endif;?>
             </div>
-        </header>
-        <!-- end header -->
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header -->
 
         <!-- section seat -->
         <section class="seat p-5">
@@ -215,13 +208,13 @@ auth(2);
                 <div class="col-lg-9 m-auto text-center">
                     <div class="seat-info p-3">
 
-                        <?php if (!empty($error_booking)) : ?>
-                            <?php foreach ($error_booking as $error) : ?>
+                        <?php if (!empty($error_booking)): ?>
+                            <?php foreach ($error_booking as $error): ?>
                                 <div class="alert alert-danger text-capitalize">
-                                    <h5> <?= $error ?></h5>
+                                    <h5> <?=$error?></h5>
                                 </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                            <?php endforeach;?>
+                        <?php endif;?>
 
                         <div class="seat-status justify-content-center d-flex">
 
@@ -236,42 +229,42 @@ auth(2);
 
                         <form action="" method="get">
                             <div class="row mt-3">
-                                <?php foreach ($s1 as $data) :  ?>
+                                <?php foreach ($s1 as $data): ?>
                                     <?php
-                                    $seat_booked = $data['id'];
-                                    $select3 = "SELECT * FROM seats where bus_check = $id_bus and seat_booked = $seat_booked ";
-                                    $s3 = mysqli_query($conn, $select3);
-                                    $row3 = mysqli_fetch_assoc($s3);
+$seat_booked = $data['id'];
+$select3 = "SELECT * FROM seats where bus_check = $id_bus and seat_booked = $seat_booked ";
+$s3 = mysqli_query($conn, $select3);
+$row3 = mysqli_fetch_assoc($s3);
 
-                                    ?>
+?>
                                     <div class="col-lg-3 col-md-6">
                                         <div class="seat-status">
 
                                             <div class="seat-text-2 col-md-6 mt-3">
                                                 <div class="text-span-seat p-0">
                                                     <span>
-                                                        <?php if (empty($row3) && empty($error_booking)) : ?>
-                                                            <a href="?confirm= <?= $data['id'] ?>" class="text-dark booked_parent">
+                                                        <?php if (empty($row3) && empty($error_booking)): ?>
+                                                            <a href="?confirm= <?=$data['id']?>" class="text-dark booked_parent">
                                                                 <svg viewBox="0 0 31 35" xmlns="http://www.w3.org/2000/svg" class="">
                                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M25.7941 30.323H28.7353V29.7265H25.7941V30.323ZM5.20588 17.4991L5.20588 27.9372H2.26471L2.26471 17.4991C2.26471 17.3345 2.39647 17.2009 2.55882 17.2009H4.91176C5.07412 17.2009 5.20588 17.3345 5.20588 17.4991ZM6.97059 21.9964L6.97059 17.4991C6.97059 16.4493 6.20235 15.5779 5.20588 15.433L5.20588 4.97345C5.20588 3.49363 6.39353 2.28938 7.85294 2.28938L23.1471 2.28938C24.6065 2.28938 25.7941 3.49363 25.7941 4.97345L25.7941 15.433C24.7976 15.5779 24.0294 16.4493 24.0294 17.4991V21.9964C23.9312 21.9803 23.8335 21.9726 23.7353 21.9726L7.26471 21.9726C7.16647 21.9726 7.06882 21.9803 6.97059 21.9964ZM6.97059 24.0602C6.97059 23.8955 7.10235 23.7619 7.26471 23.7619L23.7353 23.7619C23.8976 23.7619 24.0294 23.8955 24.0294 24.0602V30.323L6.97059 30.323L6.97059 24.0602ZM25.7941 17.4991C25.7941 17.3345 25.9259 17.2009 26.0882 17.2009H28.4412C28.6035 17.2009 28.7353 17.3345 28.7353 17.4991L28.7353 27.9372H25.7941L25.7941 17.4991ZM2.26471 30.323H5.20588V29.7265H2.26471V30.323ZM9.32353 32.7088L21.6765 32.7088V32.1124H9.32353V32.7088ZM28.4412 15.4115H27.5588L27.5588 4.97345C27.5588 2.50649 25.58 0.5 23.1471 0.5L7.85294 0.5C5.42 0.5 3.44118 2.50649 3.44118 4.97345L3.44118 15.4115H2.55882C1.42353 15.4115 0.5 16.3479 0.5 17.4991L0.5 31.2177C0.5 31.711 0.895882 32.1124 1.38235 32.1124H7.55941L7.56353 34.5L23.4459 34.5L23.4418 32.1124H29.6176C30.1041 32.1124 30.5 31.711 30.5 31.2177L30.5 17.4991C30.5 16.3479 29.5765 15.4115 28.4412 15.4115Z"></path>
                                                                 </svg>
-                                                                <h5><?= $data['id'] ?></h5>
+                                                                <h5><?=$data['id']?></h5>
                                                             </a>
-                                                        <?php else : ?>
-                                                            <a href="# <?= $data['id'] ?>" class="text-danger ">
+                                                        <?php else: ?>
+                                                            <a href="# <?=$data['id']?>" class="text-danger ">
                                                                 <svg viewBox="0 0 31 35" xmlns="http://www.w3.org/2000/svg" class="booked">
                                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M25.7941 30.323H28.7353V29.7265H25.7941V30.323ZM5.20588 17.4991L5.20588 27.9372H2.26471L2.26471 17.4991C2.26471 17.3345 2.39647 17.2009 2.55882 17.2009H4.91176C5.07412 17.2009 5.20588 17.3345 5.20588 17.4991ZM6.97059 21.9964L6.97059 17.4991C6.97059 16.4493 6.20235 15.5779 5.20588 15.433L5.20588 4.97345C5.20588 3.49363 6.39353 2.28938 7.85294 2.28938L23.1471 2.28938C24.6065 2.28938 25.7941 3.49363 25.7941 4.97345L25.7941 15.433C24.7976 15.5779 24.0294 16.4493 24.0294 17.4991V21.9964C23.9312 21.9803 23.8335 21.9726 23.7353 21.9726L7.26471 21.9726C7.16647 21.9726 7.06882 21.9803 6.97059 21.9964ZM6.97059 24.0602C6.97059 23.8955 7.10235 23.7619 7.26471 23.7619L23.7353 23.7619C23.8976 23.7619 24.0294 23.8955 24.0294 24.0602V30.323L6.97059 30.323L6.97059 24.0602ZM25.7941 17.4991C25.7941 17.3345 25.9259 17.2009 26.0882 17.2009H28.4412C28.6035 17.2009 28.7353 17.3345 28.7353 17.4991L28.7353 27.9372H25.7941L25.7941 17.4991ZM2.26471 30.323H5.20588V29.7265H2.26471V30.323ZM9.32353 32.7088L21.6765 32.7088V32.1124H9.32353V32.7088ZM28.4412 15.4115H27.5588L27.5588 4.97345C27.5588 2.50649 25.58 0.5 23.1471 0.5L7.85294 0.5C5.42 0.5 3.44118 2.50649 3.44118 4.97345L3.44118 15.4115H2.55882C1.42353 15.4115 0.5 16.3479 0.5 17.4991L0.5 31.2177C0.5 31.711 0.895882 32.1124 1.38235 32.1124H7.55941L7.56353 34.5L23.4459 34.5L23.4418 32.1124H29.6176C30.1041 32.1124 30.5 31.711 30.5 31.2177L30.5 17.4991C30.5 16.3479 29.5765 15.4115 28.4412 15.4115Z"></path>
                                                                 </svg>
-                                                                <h5><?= $data['id'] ?></h5>
+                                                                <h5><?=$data['id']?></h5>
                                                             </a>
-                                                        <?php endif; ?>
+                                                        <?php endif;?>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                <?php endforeach; ?>
+                                <?php endforeach;?>
                             </div>
 
                         </form>
@@ -282,76 +275,78 @@ auth(2);
         </section>
         <!-- end section seat -->
     </main>
-<?php else : ?>
+<?php else: ?>
 
     <main class="Arabic" id="Ar">
 
         <!-- Start Header -->
-        <header>
-            <div class="Navbar p-3">
-                <nav class="navbar navbar-expand-lg ">
-                    <div class="container-fluid">
-                        <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">HORUS
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse " id="navbarNav">
-                            <ul class="navbar-nav m-auto">
-                                <li class="nav-item active_ar active_ar6">
-                                    <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="contact.php">الاتصال بنا</a>
-                                </li>
-                                <li class="nav-item active_ar active_ar5 ">
-                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="booking.php">الحجز</a>
-                                </li>
-                                <li class="nav-item active_ar active_ar4">
-                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#services_Ar">الخدمات</a>
-                                </li>
-                                <li class="nav-item active_ar active_ar3">
-                                    <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="#team_Ar">الفريق</a>
-                                </li>
-                                <li class="nav-item active_ar active_ar2 ">
-                                    <a class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="#aboutus">من نحن</a>
-                                </li>
-                                <li class="nav-item active_ar active_ar1">
-                                    <a class="nav-link  animate__animated animate__bounceInUp " data-wow-delay="1s" aria-current="page" href="index.php">الصفحة الرئيسية
-                                    </a>
-                                </li>
-                            </ul>
+        <header style="direction:rtl;" >
+      <div class="Navbar p-3">
+        <nav class="navbar navbar-expand-lg ">
+          <div class="container-fluid">
+            <a class="navbar-brand hours animate__animated animate__bounceInLeft" data-wow-delay="1s" href="#">حورس</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+              <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                  <a class="nav-link  animate__animated animate__bounceInUp active" data-wow-delay="1s" aria-current="page" href="/Horus/index.php">الرئيسية</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a href ="#aboutus" class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/index.php#about">من نحن</a>
+                </li>
+                <li  class="nav-item nav-after">
+                  <a href="#team_Ar" class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="/Horus/index.php#team">فريق العمل</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a href="#services_Ar" class="nav-link animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/index.php#services">الخدمات</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link animate__animated animate__bounceInUp " data-wow-delay="1s" href="/Horus/booking.php">الحجز</a>
+                </li>
+                <li class="nav-item nav-after">
+                  <a class="nav-link  animate__animated animate__bounceInDown" data-wow-delay="1s" href="/Horus/contact.php">تواصل معنا</a>
+                </li>
+              </ul>
+              <?php if (isset($_SESSION['users'])): ?>
+                <form class="d-flex m-auto header-login" method="post" role="search">
+                  <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الخروج </button>
+                </form>
+                <a href="/Horus/Admin/login.php" class=" nav-link nav-profile d-flex align-items-center pe-2 animate__animated animate__lightSpeedInRight" data-wow-delay="1s">
+                  <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt="">
+                  <span class="d-none d-md-block ps-2" style="color: #e45927;">للموظفين فقط</span>
 
-                            <?php if (isset($_SESSION['users'])) : ?>
-                                <form class="d-flex m-auto header-login" method="post" role="search">
-                                    <button name="signout" href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الخروج</button>
-                                </form>
-                                <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
-
-                            <?php else : ?>
-                                <form class="d-flex m-auto header-login" role="search">
-                                    <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s">تسجيل الدخول</a>
-                                </form>
-                                <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
-
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </nav>
+                </a>
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="/Horus/profile.php">
+                  <img src="assets/images/person.png" style="width: 30px;" alt="">
+                  <span class="d-none d-md-block ps-2" style="color: #e45927;"><?=$row['name']?></span>
+                </a><!-- نهاية صورة الملف الشخصي -->
+              <?php else: ?>
+                <form class="d-flex m-auto header-login" role="search">
+                  <a href="/Horus/login.php" class="Btn margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> تسجيل الدخول</a>
+                </form>
+                <a href="/Horus/Admin/login.php" class=" margin-response m-auto animate__animated animate__lightSpeedInRight" data-wow-delay="1s"> <img src="Admin/assets/img/software-engineer.png" style="width: 30px;" alt=""></a>
+              <?php endif;?>
             </div>
-        </header>
-        <!-- End Header -->
-
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- نهاية الهيدر -->
 
         <!-- section seat -->
         <section class="seat p-5">
             <div class="container">
                 <div class="col-lg-9 m-auto text-center">
                     <div class="seat-info p-3">
-                        <?php if (!empty($error_booking_ar)) : ?>
-                            <?php foreach ($error_booking_ar as $error) : ?>
+                        <?php if (!empty($error_booking_ar)): ?>
+                            <?php foreach ($error_booking_ar as $error): ?>
                                 <div class="alert alert-danger text-capitalize">
-                                    <h5> <?= $error ?></h5>
+                                    <h5> <?=$error?></h5>
                                 </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                            <?php endforeach;?>
+                        <?php endif;?>
 
                         <div class="seat-status justify-content-center d-flex">
 
@@ -365,41 +360,41 @@ auth(2);
 
                         <form action="" method="get">
                             <div class="row mt-3">
-                                <?php foreach ($s1 as $data) :  ?>
+                                <?php foreach ($s1 as $data): ?>
                                     <?php
-                                    $seat_booked = $data['id'];
-                                    $select3 = "SELECT * FRom seats where bus_check = $id_bus and seat_booked = $seat_booked";
-                                    $s3 = mysqli_query($conn, $select3);
-                                    $row3 = mysqli_fetch_assoc($s3);
-                                    ?>
+$seat_booked = $data['id'];
+$select3 = "SELECT * FRom seats where bus_check = $id_bus and seat_booked = $seat_booked";
+$s3 = mysqli_query($conn, $select3);
+$row3 = mysqli_fetch_assoc($s3);
+?>
                                     <div class="col-lg-3 col-md-6">
                                         <div class="seat-status">
 
                                             <div class="seat-text-2 col-md-6 mt-3">
                                                 <div class="text-span-seat p-0">
                                                     <span>
-                                                        <?php if (empty($row3)) : ?>
-                                                            <a href="?confirm= <?= $data['id'] ?>" class="booked_parent">
+                                                        <?php if (empty($row3)): ?>
+                                                            <a href="?confirm= <?=$data['id']?>" class="booked_parent">
                                                                 <svg viewBox="0 0 31 35" xmlns="http://www.w3.org/2000/svg" class="">
                                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M25.7941 30.323H28.7353V29.7265H25.7941V30.323ZM5.20588 17.4991L5.20588 27.9372H2.26471L2.26471 17.4991C2.26471 17.3345 2.39647 17.2009 2.55882 17.2009H4.91176C5.07412 17.2009 5.20588 17.3345 5.20588 17.4991ZM6.97059 21.9964L6.97059 17.4991C6.97059 16.4493 6.20235 15.5779 5.20588 15.433L5.20588 4.97345C5.20588 3.49363 6.39353 2.28938 7.85294 2.28938L23.1471 2.28938C24.6065 2.28938 25.7941 3.49363 25.7941 4.97345L25.7941 15.433C24.7976 15.5779 24.0294 16.4493 24.0294 17.4991V21.9964C23.9312 21.9803 23.8335 21.9726 23.7353 21.9726L7.26471 21.9726C7.16647 21.9726 7.06882 21.9803 6.97059 21.9964ZM6.97059 24.0602C6.97059 23.8955 7.10235 23.7619 7.26471 23.7619L23.7353 23.7619C23.8976 23.7619 24.0294 23.8955 24.0294 24.0602V30.323L6.97059 30.323L6.97059 24.0602ZM25.7941 17.4991C25.7941 17.3345 25.9259 17.2009 26.0882 17.2009H28.4412C28.6035 17.2009 28.7353 17.3345 28.7353 17.4991L28.7353 27.9372H25.7941L25.7941 17.4991ZM2.26471 30.323H5.20588V29.7265H2.26471V30.323ZM9.32353 32.7088L21.6765 32.7088V32.1124H9.32353V32.7088ZM28.4412 15.4115H27.5588L27.5588 4.97345C27.5588 2.50649 25.58 0.5 23.1471 0.5L7.85294 0.5C5.42 0.5 3.44118 2.50649 3.44118 4.97345L3.44118 15.4115H2.55882C1.42353 15.4115 0.5 16.3479 0.5 17.4991L0.5 31.2177C0.5 31.711 0.895882 32.1124 1.38235 32.1124H7.55941L7.56353 34.5L23.4459 34.5L23.4418 32.1124H29.6176C30.1041 32.1124 30.5 31.711 30.5 31.2177L30.5 17.4991C30.5 16.3479 29.5765 15.4115 28.4412 15.4115Z"></path>
                                                                 </svg>
-                                                                <h5><?= $data['id'] ?></h5>
+                                                                <h5><?=$data['id']?></h5>
                                                             </a>
-                                                        <?php else : ?>
-                                                            <a href="# <?= $data['id'] ?>" class="text-danger">
+                                                        <?php else: ?>
+                                                            <a href="# <?=$data['id']?>" class="text-danger">
                                                                 <svg viewBox="0 0 31 35" xmlns="http://www.w3.org/2000/svg" class="booked">
                                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M25.7941 30.323H28.7353V29.7265H25.7941V30.323ZM5.20588 17.4991L5.20588 27.9372H2.26471L2.26471 17.4991C2.26471 17.3345 2.39647 17.2009 2.55882 17.2009H4.91176C5.07412 17.2009 5.20588 17.3345 5.20588 17.4991ZM6.97059 21.9964L6.97059 17.4991C6.97059 16.4493 6.20235 15.5779 5.20588 15.433L5.20588 4.97345C5.20588 3.49363 6.39353 2.28938 7.85294 2.28938L23.1471 2.28938C24.6065 2.28938 25.7941 3.49363 25.7941 4.97345L25.7941 15.433C24.7976 15.5779 24.0294 16.4493 24.0294 17.4991V21.9964C23.9312 21.9803 23.8335 21.9726 23.7353 21.9726L7.26471 21.9726C7.16647 21.9726 7.06882 21.9803 6.97059 21.9964ZM6.97059 24.0602C6.97059 23.8955 7.10235 23.7619 7.26471 23.7619L23.7353 23.7619C23.8976 23.7619 24.0294 23.8955 24.0294 24.0602V30.323L6.97059 30.323L6.97059 24.0602ZM25.7941 17.4991C25.7941 17.3345 25.9259 17.2009 26.0882 17.2009H28.4412C28.6035 17.2009 28.7353 17.3345 28.7353 17.4991L28.7353 27.9372H25.7941L25.7941 17.4991ZM2.26471 30.323H5.20588V29.7265H2.26471V30.323ZM9.32353 32.7088L21.6765 32.7088V32.1124H9.32353V32.7088ZM28.4412 15.4115H27.5588L27.5588 4.97345C27.5588 2.50649 25.58 0.5 23.1471 0.5L7.85294 0.5C5.42 0.5 3.44118 2.50649 3.44118 4.97345L3.44118 15.4115H2.55882C1.42353 15.4115 0.5 16.3479 0.5 17.4991L0.5 31.2177C0.5 31.711 0.895882 32.1124 1.38235 32.1124H7.55941L7.56353 34.5L23.4459 34.5L23.4418 32.1124H29.6176C30.1041 32.1124 30.5 31.711 30.5 31.2177L30.5 17.4991C30.5 16.3479 29.5765 15.4115 28.4412 15.4115Z"></path>
                                                                 </svg>
-                                                                <h5><?= $data['id'] ?></h5>
+                                                                <h5><?=$data['id']?></h5>
                                                             </a>
-                                                        <?php endif; ?>
+                                                        <?php endif;?>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                <?php endforeach; ?>
+                                <?php endforeach;?>
                             </div>
 
                         </form>
@@ -411,7 +406,7 @@ auth(2);
         <!-- end section seat -->
     </main>
 
-<?php endif; ?>
+<?php endif;?>
 
 
 

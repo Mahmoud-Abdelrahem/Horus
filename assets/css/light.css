@@ -2276,7 +2276,24 @@ body {
     background-color: #393e461f;
 }
 
+.info-form
+{
+    background-color: #f1f1f1 !important;
+    color: black !important;
+}
+.form-group-content select
+{    
+    color: black !important;
+}
+.info-form .form-group-content .booking-btn
+{
+    color: black !important;
 
+}
+.info-form .form-group-content label
+{
+    color: #000 !important;
+}
 
 
 

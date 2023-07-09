@@ -91,7 +91,7 @@ $image = $_SESSION['image']['image_name'];
                   <div class="col-lg-9 col-md-8"><?= $row['full_name'] ?></div>
                 </div>
 
-               0/
+    
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Email</div>

@@ -392,3 +392,15 @@ a{
 line-height: 1.5px;
 margin: 5px 0;
 }
+
+/* light */
+header{
+    background-color: white;
+}
+.panel-body{
+    background-color: #f1f1f1;
+    color: black !important;
+}
+.pay_btn {
+    color: black;
+}

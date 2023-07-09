@@ -125,7 +125,7 @@ auth(2);
 
 
 <?php if ($rowOne['langID'] == 2) : ?>
-    <main class="English search" id="En">
+    <main class="English search" id="En" style="text-transform: capitalize ;">
 
         <!-- start header -->
     <header>
@@ -217,7 +217,7 @@ auth(2);
 
                                         <div class="date">
 
-                                            <p>Start Time : <span><?= $data['start_time'] ?></span> AM</p>
+                                            <p>Start Time : <span><?= $data['start_time'] ?></span></p>
                                         </div>
 
                                         <div class="buy my-3">

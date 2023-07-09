@@ -3,6 +3,10 @@ require_once 'config.php';
 include '../app/functions.php';
 require_once 'dbConnect.php';
 
+
+
+
+
 $bus_number = $_SESSION['confirm_booking']['bus_num'];
 $start_time = $_SESSION['confirm_booking']['start_time'];
 $id_seat = $_SESSION['confirm_booking']['seat_booked'];
@@ -14,42 +18,21 @@ $db1 = "horus-project";
 
 $conn = mysqli_connect("$host", "$name", "$password", "$db1");
 
-// Include the configuration file 
-$payment_ref_id = $statusMsg = '';
-$status = 'error';
-
-
-
 if (isset($_SESSION['users'])) {
     $id = $_SESSION['users']['id'];
     $select = "SELECT * FROM users where id = $id";
     $s =  mysqli_query($conn, $select);
     $row = mysqli_fetch_assoc($s);
 
-    if (isset($_POST['lang'])) {
-        if ($row['langID'] == 1) {
-            $update = "UPDATE users set `langID` = 2  where id = $id";
-            mysqli_query($conn, $update);
-            // path('/payment/payment-status.php');
-        } else {
-            $update = "UPDATE users set `langID` = 1 where id = $id ";
-            mysqli_query($conn, $update);
-            // path("/payment/payment-status.php");
-        }
-    }
-
-    if (isset($_POST['mode'])) {
-        if ($row['modeID'] == 1) {
-            $update = "UPDATE users set `modeID` = 2  where id = $id";
-            mysqli_query($conn, $update);
-            // path('payment/payment-status.php');
-        } else {
-            $update = "UPDATE users set `modeID` = 1 where id = $id ";
-            mysqli_query($conn, $update);
-            // path("payment/payment-status.php");
-        }
-    }
 }
+
+// Include the configuration file 
+$payment_ref_id = $statusMsg = '';
+$status = 'error';
+
+
+
+
 
 // Check whether the payment ID is not empty 
 if (!empty($_GET['pid'])) {
@@ -124,14 +107,12 @@ auth(2);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
-    <?php if (isset($_SESSION['users'])) : ?>
         <?php if ($row['modeID'] == 1) : ?>
             <link rel="stylesheet" href="/Horus/payment/css/main.css">
         <?php else : ?>
             <link rel="stylesheet" href="/Horus/payment/css/light.css">
         <?php endif; ?>
     
-    <?php endif; ?>
 
     <link rel="stylesheet" href="bootstrap/bootstrap.css">
     <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
@@ -146,33 +127,6 @@ auth(2);
     </div>
     <!-- End loading page -->
 
-
-    <!-- mode and translate  with login users-->
-    <?php if (isset($_SESSION['users'])) : ?>
-        <div class="slide-text">
-            <div class="row">
-                <div class="col-lg-2 ">
-                    <span class="moon ">
-                        <form method="post" enctype="multipart/form-data">
-                            <button name="mode" id="translate"><i class="fa-solid fa-moon moon-dark"></i></button>
-
-                        </form>
-                    </span>
-                </div>
-                <div class="col-lg-2">
-                    <span class="trans">
-
-                        <form method="post" enctype="multipart/form-data">
-                            <button name="lang" id="translate"> <i class="fa-solid fa-globe"></i></button>
-                        </form>
-
-                    </span>
-                </div>
-            </div>
-
-        </div>
-    <?php endif; ?>
-    <!-- End mode and translate with login users -->
 
 
         <!-- start header -->
